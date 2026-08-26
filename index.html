@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#f8f4ee">
+
+    <meta name="description" content="Địa điểm và chỉ đường đến tiệc cưới Minh Thuận & Cẩm Hương">
+
+    <title>Minh Thuận & Cẩm Hương | Địa điểm tiệc cưới</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =====================================================
+         LEAFLET CSS
+    ====================================================== -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
+
+
+    <style>
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            min-height: 100%;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at top,
+                    #fffdf9 0%,
+                    #f8f4ee 45%,
+                    #f1ebe2 100%);
+
+            color: #40372f;
+
+            font-family:
+                "Montserrat",
+                Arial,
+                sans-serif;
+
+            -webkit-font-smoothing: antialiased;
+
+            overflow-x: hidden;
+        }
+
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .page {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 760px;
+
+            min-height: 100vh;
+
+            background:
+                rgba(255, 255, 255, 0.72);
+
+            position: relative;
+
+            box-shadow:
+                0 0 80px rgba(88, 67, 46, 0.08);
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           DECORATION
+        ====================================================== */
+
+        .decor {
+
+            position: absolute;
+
+            width: 240px;
+
+            height: 240px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(175, 143, 101, 0.15);
+
+            pointer-events: none;
+        }
+
+
+        .decor::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 15px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(175, 143, 101, 0.10);
+        }
+
+
+        .decor-top {
+
+            top: -150px;
+
+            right: -120px;
+        }
+
+
+        .decor-bottom {
+
+            bottom: -160px;
+
+            left: -130px;
+        }
+
+
+        /* =====================================================
+           WEDDING IDENTITY
+           
+           Chỉ nhận diện cô dâu chú rể.
+           Không chiếm quá nhiều diện tích.
+        ====================================================== */
+
+        .wedding-intro {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            padding:
+                38px 25px 18px;
+
+            animation:
+                fadeUp .8s ease both;
+        }
+
+
+        .wedding-small {
+
+            font-size: 9px;
+
+            letter-spacing: 3.5px;
+
+            text-transform: uppercase;
+
+            color: #aa8963;
+
+            margin-bottom: 12px;
+        }
+
+
+        .wedding-names {
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(34px,
+                    8vw,
+                    48px);
+
+            line-height: 1;
+
+            font-weight: 500;
+
+            color: #544335;
+
+            letter-spacing: -.5px;
+        }
+
+
+        .wedding-names .ampersand {
+
+            display: inline;
+
+            font-size: .65em;
+
+            color: #ad8a62;
+
+            font-weight: 400;
+
+            margin:
+                0 7px;
+        }
+
+
+        .wedding-line {
+
+            width: 48px;
+
+            height: 1px;
+
+            margin:
+                15px auto 0;
+
+            background:
+                linear-gradient(to right,
+                    transparent,
+                    #b89a72,
+                    transparent);
+        }
+
+
+        /* =====================================================
+           LOCATION HEADER
+        ====================================================== */
+
+        .header {
+
+            position: relative;
+
+            padding:
+                22px 28px 27px;
+
+            text-align: center;
+
+            z-index: 2;
+
+            animation:
+                fadeUp .8s ease .1s both;
+        }
+
+
+        .eyebrow {
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: #aa8963;
+
+            margin-bottom: 13px;
+        }
+
+
+        .title {
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size:
+                clamp(38px,
+                    8vw,
+                    52px);
+
+            line-height: 1;
+
+            font-weight: 500;
+
+            color: #544335;
+
+            margin-bottom: 15px;
+        }
+
+
+        .title-line {
+
+            width: 54px;
+
+            height: 1px;
+
+            margin:
+                0 auto 16px;
+
+            background:
+                linear-gradient(to right,
+                    transparent,
+                    #b89a72,
+                    transparent);
+        }
+
+
+        .subtitle {
+
+            max-width: 470px;
+
+            margin: auto;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            color: #85786c;
+        }
+
+
+        /* =====================================================
+           MAP CARD
+        ====================================================== */
+
+        .map-card {
+
+            position: relative;
+
+            margin:
+                0 20px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            background:
+                #e9e4da;
+
+            box-shadow:
+                0 15px 45px rgba(71, 52, 34, 0.13);
+
+            border:
+                1px solid rgba(160, 128, 90, 0.18);
+
+            animation:
+                fadeUp .8s ease .2s both;
+        }
+
+
+        #map {
+
+            width: 100%;
+
+            height: 410px;
+
+            background:
+                #e9e4da;
+
+            position: relative;
+        }
+
+
+        #map .leaflet-tile {
+
+            max-width: none !important;
+        }
+
+
+        /* =====================================================
+           MAP LABEL
+        ====================================================== */
+
+        .map-label {
+
+            position: absolute;
+
+            top: 16px;
+
+            left: 16px;
+
+            z-index: 500;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                9px 13px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.93);
+
+            backdrop-filter:
+                blur(10px);
+
+            -webkit-backdrop-filter:
+                blur(10px);
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.10);
+
+            font-size: 10px;
+
+            color: #655648;
+
+            letter-spacing: .4px;
+        }
+
+
+        .map-label-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                #a98760;
+
+            box-shadow:
+                0 0 0 4px rgba(169, 135, 96, .15);
+        }
+
+
+        /* =====================================================
+           LOCATION
+        ====================================================== */
+
+        .location {
+
+            padding:
+                34px 25px 15px;
+
+            text-align: center;
+
+            position: relative;
+
+            z-index: 2;
+
+            animation:
+                fadeUp .8s ease .3s both;
+        }
+
+
+        .pin {
+
+            width: 44px;
+
+            height: 44px;
+
+            margin:
+                0 auto 15px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #f4ede3;
+
+            color:
+                #9b7956;
+
+            font-size: 19px;
+
+            border:
+                1px solid rgba(155, 121, 86, .20);
+        }
+
+
+        .location-name {
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 30px;
+
+            line-height: 1.15;
+
+            font-weight: 600;
+
+            color: #514237;
+
+            margin-bottom: 10px;
+        }
+
+
+        .address {
+
+            max-width: 520px;
+
+            margin: auto;
+
+            color: #807469;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .action {
+
+            padding:
+                15px 25px 28px;
+
+            position: relative;
+
+            z-index: 2;
+
+            animation:
+                fadeUp .8s ease .4s both;
+        }
+
+
+        /* =====================================================
+           PRIMARY BUTTON
+           
+           Nút quan trọng nhất.
+        ====================================================== */
+
+        .direction-button {
+
+            width: 100%;
+
+            min-height: 56px;
+
+            border: 0;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            color: #fff;
+
+            background:
+                linear-gradient(135deg,
+                    #a88763,
+                    #8d6c4c);
+
+            box-shadow:
+                0 10px 28px rgba(130, 95, 59, 0.25);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: .5px;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .direction-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 32px rgba(130, 95, 59, 0.30);
+        }
+
+
+        .direction-button:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        .direction-icon {
+
+            width: 20px;
+
+            height: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        /* =====================================================
+        SECONDARY BUTTON
+        Dẫn đến trang thiệp cưới đầy đủ.
+
+        Màu rose nude:
+        - Nổi bật hơn nền
+        - Không cạnh tranh với nút Chỉ đường
+        - Hài hòa với phong cách cưới
+        ===================================================== */
+
+        .invitation-button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            margin-top: 12px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(135deg,
+                    #d8a0a7,
+                    #c98791);
+
+            border:
+                1px solid rgba(190, 125, 135, .35);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: .3px;
+
+            box-shadow:
+                0 8px 22px rgba(191, 126, 137, .20);
+
+            transition:
+                transform .25s ease,
+                background .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .invitation-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                linear-gradient(135deg,
+                    #dca6ad,
+                    #c77e89);
+
+            box-shadow:
+                0 12px 28px rgba(191, 126, 137, .28);
+        }
+
+
+        .invitation-button:active {
+
+            transform:
+                translateY(0);
+
+            box-shadow:
+                0 6px 16px rgba(191, 126, 137, .20);
+        }
+
+
+        .invitation-icon {
+
+            font-size: 17px;
+
+            color: #ffffff;
+
+            line-height: 1;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            padding:
+                0 25px 34px;
+
+            text-align: center;
+
+            color: #b0a49a;
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 15px;
+
+            letter-spacing: .4px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .footer strong {
+
+            font-weight: 500;
+
+            color: #96734f;
+        }
+
+
+        /* =====================================================
+           LEAFLET
+        ====================================================== */
+
+        .leaflet-control-zoom {
+
+            border: none !important;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .12) !important;
+        }
+
+
+        .leaflet-control-zoom a {
+
+            border: none !important;
+
+            color:
+                #6d5b4a !important;
+
+            background:
+                rgba(255, 255, 255, .94) !important;
+        }
+
+
+        .leaflet-control-zoom a:hover {
+
+            background:
+                #f7f1e8 !important;
+        }
+
+
+        .leaflet-control-attribution {
+
+            font-size: 8px !important;
+
+            background:
+                rgba(255, 255, 255, .78) !important;
+        }
+
+
+        /* =====================================================
+           CUSTOM WEDDING MARKER
+        ====================================================== */
+
+        .wedding-marker {
+
+            position: relative;
+
+            width: 46px;
+
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .wedding-marker::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 46px;
+
+            height: 46px;
+
+            border-radius:
+                50% 50% 50% 0;
+
+            transform:
+                rotate(-45deg);
+
+            background:
+                #96734f;
+
+            box-shadow:
+                0 5px 15px rgba(100, 70, 40, .30);
+        }
+
+
+        .wedding-marker-heart {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: white;
+
+            font-size: 17px;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================================
+           POPUP
+        ====================================================== */
+
+        .leaflet-popup-content-wrapper {
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, .15);
+        }
+
+
+        .leaflet-popup-tip {
+
+            box-shadow: none;
+        }
+
+
+        .popup {
+
+            text-align: center;
+
+            padding: 4px;
+        }
+
+
+        .popup-title {
+
+            font-family:
+                "Cormorant Garamond",
+                Georgia,
+                serif;
+
+            font-size: 19px;
+
+            font-weight: 600;
+
+            color: #534336;
+
+            margin-bottom: 4px;
+        }
+
+
+        .popup-address {
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            color: #81756b;
+        }
+
+
+        /* =====================================================
+           ANIMATION
+        ====================================================== */
+
+        @keyframes fadeUp {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                box-shadow: none;
+            }
+
+
+            .wedding-intro {
+
+                padding:
+                    34px 20px 16px;
+            }
+
+
+            .wedding-small {
+
+                font-size: 8px;
+
+                letter-spacing: 3px;
+
+                margin-bottom: 10px;
+            }
+
+
+            .wedding-names {
+
+                font-size:
+                    clamp(34px,
+                        10vw,
+                        44px);
+            }
+
+
+            .wedding-line {
+
+                margin-top:
+                    14px;
+            }
+
+
+            .header {
+
+                padding:
+                    20px 20px 25px;
+            }
+
+
+            .eyebrow {
+
+                font-size: 9px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .title {
+
+                font-size: 40px;
+            }
+
+
+            .map-card {
+
+                margin:
+                    0 12px;
+
+                border-radius: 15px;
+            }
+
+
+            #map {
+
+                height: 380px;
+            }
+
+
+            .location {
+
+                padding:
+                    28px 20px 10px;
+            }
+
+
+            .location-name {
+
+                font-size: 27px;
+            }
+
+
+            .action {
+
+                padding:
+                    15px 20px 25px;
+            }
+
+
+            .footer {
+
+                padding-bottom: 25px;
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL PHONES
+        ====================================================== */
+
+        @media (max-width: 380px) {
+
+            .wedding-intro {
+
+                padding-top:
+                    30px;
+            }
+
+
+            .wedding-names {
+
+                font-size:
+                    33px;
+            }
+
+
+            #map {
+
+                height: 340px;
+            }
+
+
+            .title {
+
+                font-size: 36px;
+            }
+
+
+            .location-name {
+
+                font-size: 25px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+        <main class="container">
+
+
+            <!-- =================================================
+             DECORATIVE ELEMENTS
+        ================================================== -->
+
+            <div class="decor decor-top"></div>
+
+            <div class="decor decor-bottom"></div>
+
+
+            <!-- =================================================
+             WEDDING IDENTITY
+             
+             Chỉ hiển thị nhận diện cô dâu chú rể.
+        ================================================== -->
+
+            <section class="wedding-intro">
+
+                <div class="wedding-small">
+                    Trân trọng kính mời
+                </div>
+
+
+                <h1 class="wedding-names">
+
+                    Minh Thuận
+
+                    <span class="ampersand">
+                        &
+                    </span>
+
+                    Cẩm Hương
+
+                </h1>
+
+
+                <div class="wedding-line"></div>
+
+            </section>
+
+
+            <!-- =================================================
+             LOCATION HEADER
+        ================================================== -->
+
+            <header class="header">
+
+                <div class="eyebrow">
+                    Wedding Location
+                </div>
+
+
+                <h2 class="title">
+                    Địa điểm tiệc cưới
+                </h2>
+
+
+                <div class="title-line"></div>
+
+
+                <p class="subtitle">
+
+                    Bản đồ và thông tin địa điểm
+                    tổ chức tiệc cưới
+
+                </p>
+
+            </header>
+
+
+            <!-- =================================================
+             MAP
+        ================================================== -->
+
+            <section class="map-card">
+
+
+                <div class="map-label">
+
+                    <span class="map-label-dot"></span>
+
+                    Địa điểm tổ chức
+
+                </div>
+
+
+                <div id="map"></div>
+
+
+            </section>
+
+
+            <!-- =================================================
+             LOCATION INFO
+        ================================================== -->
+
+            <section class="location">
+
+
+                <div class="pin">
+                    ♥
+                </div>
+
+
+                <h3 id="locationName" class="location-name">
+                </h3>
+
+
+                <p id="locationAddress" class="address">
+                </p>
+
+
+            </section>
+
+
+            <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+            <section class="action">
+
+
+                <!-- =============================================
+                 PRIMARY ACTION
+            ============================================== -->
+
+                <button id="directionButton" class="direction-button">
+
+                    <span class="direction-icon">
+                        ⌖
+                    </span>
+
+                    <span>
+                        Chỉ đường đến tiệc cưới
+                    </span>
+
+                </button>
+
+
+                <!-- =============================================
+                 SECONDARY ACTION
+                 
+                 Link đến trang thiệp cưới đầy đủ.
+            ============================================== -->
+
+                <a id="invitationButton" href="#" class="invitation-button">
+
+                    <span class="invitation-icon">
+                        ♡
+                    </span>
+
+                    <span>
+                        Xem thiệp cưới
+                    </span>
+
+                </a>
+
+
+            </section>
+
+
+            <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+            <footer class="footer">
+
+                Hẹn gặp bạn trong ngày vui của
+                <strong>
+                    Minh Thuận & Cẩm Hương
+                </strong>
+                ♥
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================================================
+     LEAFLET JS
+========================================================== -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin>
+    </script>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           WEDDING CONFIGURATION
+    
+           CHỈ CẦN SỬA PHẦN NÀY
+           KHI ĐỔI THÔNG TIN ĐÁM CƯỚI
+        ====================================================== */
+
+        const WEDDING = {
+
+
+            /* =================================================
+               CÔ DÂU & CHÚ RỂ
+            ================================================== */
+
+            groom:
+                "Minh Thuận",
+
+            bride:
+                "Cẩm Hương",
+
+
+            /* =================================================
+               TRANG THIỆP CƯỚI
+
+            ================================================== */
+
+            invitationUrl:
+                "/wedding",
+
+
+            /* =================================================
+               ĐỊA ĐIỂM
+            ================================================== */
+
+            name:
+                "Nhà Văn Hóa Thôn Phương Nghệ 2",
+
+            address:
+                "xã Xuân Phú, TP. Đà Nẵng (Đ/c cũ: Quế Phú, Quế Sơn, Quảng Nam)",
+
+
+            /* =================================================
+               TỌA ĐỘ
+            ================================================== */
+
+            latitude:
+                15.78354973071366,
+
+            longitude:
+                108.29920269592817
+
+        };
+
+
+
+        /* =====================================================
+           SET INVITATION LINK
+        ====================================================== */
+
+        document
+            .getElementById("invitationButton")
+            .href =
+            WEDDING.invitationUrl;
+
+
+
+        /* =====================================================
+           DISPLAY LOCATION
+        ====================================================== */
+
+        document
+            .getElementById("locationName")
+            .textContent =
+            WEDDING.name;
+
+
+        document
+            .getElementById("locationAddress")
+            .textContent =
+            WEDDING.address;
+
+
+
+        /* =====================================================
+           CREATE MAP
+        ====================================================== */
+
+        const map =
+            L.map(
+                "map",
+                {
+
+                    zoomControl:
+                        true,
+
+                    scrollWheelZoom:
+                        false,
+
+                    dragging:
+                        true,
+
+                    doubleClickZoom:
+                        true,
+
+                    touchZoom:
+                        true
+
+                }
+            );
+
+
+
+        /* =====================================================
+           INITIAL MAP POSITION
+        ====================================================== */
+
+        map.setView(
+
+            [
+                WEDDING.latitude,
+                WEDDING.longitude
+            ],
+
+            13.5
+
+        );
+
+
+
+        /* =====================================================
+           ESRI WORLD STREET MAP
+        ====================================================== */
+
+        const mapLayer =
+            L.tileLayer(
+
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+
+                {
+
+                    minZoom:
+                        3,
+
+                    maxZoom:
+                        19,
+
+                    tileSize:
+                        256,
+
+                    attribution:
+                        "Tiles &copy; Esri"
+
+                }
+
+            );
+
+
+        mapLayer.addTo(map);
+
+
+
+        /* =====================================================
+           TILE ERROR MONITOR
+        ====================================================== */
+
+        mapLayer.on(
+
+            "tileerror",
+
+            function (error) {
+
+                console.warn(
+                    "Không tải được map tile:",
+                    error
+                );
+
+            }
+
+        );
+
+
+
+        /* =====================================================
+           LOCATION AREA
+        ====================================================== */
+
+        const locationCircle =
+            L.circle(
+
+                [
+                    WEDDING.latitude,
+                    WEDDING.longitude
+                ],
+
+                {
+
+                    radius:
+                        1500,
+
+                    color:
+                        "#96734f",
+
+                    weight:
+                        1,
+
+                    opacity:
+                        0.30,
+
+                    fillColor:
+                        "#96734f",
+
+                    fillOpacity:
+                        0.045
+
+                }
+
+            );
+
+
+        locationCircle.addTo(map);
+
+
+
+        /* =====================================================
+           CUSTOM WEDDING MARKER
+        ====================================================== */
+
+        const weddingIcon =
+            L.divIcon({
+
+                className:
+                    "",
+
+                html:
+                    `
+                <div class="wedding-marker">
+
+                    <div class="wedding-marker-heart">
+                        ♥
+                    </div>
+
+                </div>
+                `,
+
+                iconSize:
+                    [46, 46],
+
+                iconAnchor:
+                    [23, 46],
+
+                popupAnchor:
+                    [0, -45]
+
+            });
+
+
+
+        /* =====================================================
+           CREATE MARKER
+        ====================================================== */
+
+        const marker =
+            L.marker(
+
+                [
+                    WEDDING.latitude,
+                    WEDDING.longitude
+                ],
+
+                {
+
+                    icon:
+                        weddingIcon
+
+                }
+
+            );
+
+
+        marker.addTo(map);
+
+
+
+        /* =====================================================
+           POPUP
+        ====================================================== */
+
+        marker.bindPopup(
+
+            `
+        <div class="popup">
+
+            <div class="popup-title">
+                ${escapeHtml(WEDDING.name)}
+            </div>
+
+            <div class="popup-address">
+                ${escapeHtml(WEDDING.address)}
+            </div>
+
+        </div>
+        `,
+
+            {
+
+                closeButton:
+                    false,
+
+                offset:
+                    [0, -8]
+
+            }
+
+        );
+
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ====================================================== */
+
+        function escapeHtml(value) {
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+
+        /* =====================================================
+           REFRESH MAP SIZE
+        ====================================================== */
+
+        function refreshMap() {
+
+            map.invalidateSize({
+
+                animate:
+                    false
+
+            });
+
+        }
+
+
+        setTimeout(
+            refreshMap,
+            200
+        );
+
+
+        setTimeout(
+            refreshMap,
+            500
+        );
+
+
+        setTimeout(
+            refreshMap,
+            1000
+        );
+
+
+        window.addEventListener(
+
+            "load",
+
+            function () {
+
+                setTimeout(
+                    refreshMap,
+                    300
+                );
+
+            }
+
+        );
+
+
+        window.addEventListener(
+
+            "resize",
+
+            function () {
+
+                setTimeout(
+                    refreshMap,
+                    100
+                );
+
+            }
+
+        );
+
+
+
+        /* =====================================================
+           DETECT DEVICE
+        ====================================================== */
+
+        function getDevice() {
+
+            const userAgent =
+                navigator.userAgent ||
+                navigator.vendor ||
+                window.opera;
+
+
+            /* =================================================
+               ANDROID
+            ================================================== */
+
+            if (
+                /android/i.test(userAgent)
+            ) {
+
+                return "android";
+
+            }
+
+
+            /* =================================================
+               IOS
+            ================================================== */
+
+            if (
+
+                /iPad|iPhone|iPod/.test(
+                    userAgent
+                )
+
+                &&
+
+                !window.MSStream
+
+            ) {
+
+                return "ios";
+
+            }
+
+
+            /* =================================================
+               DESKTOP
+            ================================================== */
+
+            return "desktop";
+
+        }
+
+
+
+        /* =====================================================
+           GOOGLE MAPS WEB URL
+        ====================================================== */
+
+        function getGoogleMapsUrl() {
+
+            return (
+
+                "https://www.google.com/maps/dir/?api=1" +
+
+                "&destination=" +
+
+                encodeURIComponent(
+
+                    WEDDING.latitude +
+                    "," +
+                    WEDDING.longitude
+
+                )
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           GOOGLE MAPS ANDROID
+        ====================================================== */
+
+        function getAndroidIntent() {
+
+            return (
+
+                "google.navigation:q=" +
+
+                WEDDING.latitude +
+
+                "," +
+
+                WEDDING.longitude
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           GOOGLE MAPS IOS
+        ====================================================== */
+
+        function getGoogleMapsIOSUrl() {
+
+            return (
+
+                "comgooglemaps://?" +
+
+                "daddr=" +
+
+                WEDDING.latitude +
+
+                "," +
+
+                WEDDING.longitude +
+
+                "&directionsmode=driving"
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           OPEN DIRECTIONS
+        ====================================================== */
+
+        function openDirections() {
+
+            const device =
+                getDevice();
+
+
+            const googleWeb =
+                getGoogleMapsUrl();
+
+
+
+            /* =================================================
+               ANDROID
+            ================================================== */
+
+            if (
+                device === "android"
+            ) {
+
+                const intent =
+                    getAndroidIntent();
+
+
+                /*
+                 * Thử mở Google Maps App.
+                 */
+
+                window.location.href =
+                    intent;
+
+
+                /*
+                 * Fallback Google Maps Web.
+                 */
+
+                setTimeout(
+
+                    function () {
+
+                        window.location.href =
+                            googleWeb;
+
+                    },
+
+                    1200
+
+                );
+
+                return;
+
+            }
+
+
+
+            /* =================================================
+               IOS
+            ================================================== */
+
+            if (
+                device === "ios"
+            ) {
+
+                /*
+                 * Thử mở Google Maps App.
+                 */
+
+                window.location.href =
+                    getGoogleMapsIOSUrl();
+
+
+                /*
+                 * Fallback Google Maps Web.
+                 */
+
+                setTimeout(
+
+                    function () {
+
+                        window.location.href =
+                            googleWeb;
+
+                    },
+
+                    1200
+
+                );
+
+                return;
+
+            }
+
+
+
+            /* =================================================
+               DESKTOP
+            ================================================== */
+
+            window.open(
+
+                googleWeb,
+
+                "_blank"
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           DIRECTION BUTTON
+        ====================================================== */
+
+        document
+            .getElementById(
+                "directionButton"
+            )
+            .addEventListener(
+
+                "click",
+
+                openDirections
+
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>
