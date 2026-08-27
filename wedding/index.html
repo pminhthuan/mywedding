@@ -5,9 +5,11 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width,
+                   initial-scale=1.0,
+                   viewport-fit=cover">
 
-    <meta name="theme-color" content="#f8f1ed">
+    <meta name="theme-color" content="#f7efea">
 
     <meta name="description" content="Thiệp cưới online Minh Thuận & Cẩm Hương">
 
@@ -41,35 +43,22 @@
 
         :root {
 
-            --cream:
-                #f8f1ed;
+            --cream: #f7efea;
+            --cream-dark: #e9ddd6;
+            --paper: #fffaf7;
+            --white: #ffffff;
+            --brown: #51413b;
+            --brown-light: #8b7870;
+            --rose: #c9929a;
+            --rose-dark: #ad737c;
+            --gold: #b79a73;
+            --gold-light: #d7c09d;
+            --line: rgba(160, 126, 108, .18);
+            --shadow: rgba(70, 48, 40, .13);
 
-            --cream-dark:
-                #eee3dd;
-
-            --paper:
-                #fffaf7;
-
-            --brown:
-                #54443e;
-
-            --brown-light:
-                #86746d;
-
-            --rose:
-                #c98f98;
-
-            --rose-dark:
-                #ad737d;
-
-            --gold:
-                #b89a72;
-
-            --line:
-                rgba(160, 126, 108, .20);
-
-            --shadow:
-                rgba(76, 54, 45, .12);
+            --reveal-blur: 10px;
+            --reveal-duration: 1.15s;
+            --reveal-ease: cubic-bezier(.16, .84, .32, 1);
 
         }
 
@@ -79,91 +68,46 @@
         ====================================================== */
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
         }
-
 
         html {
-
-            scroll-behavior:
-                smooth;
-
+            scroll-behavior: smooth;
         }
-
 
         body {
-
-            background:
-                var(--cream);
-
-            color:
-                var(--brown);
-
-            font-family:
-                "Montserrat",
-                Arial,
-                sans-serif;
-
-            -webkit-font-smoothing:
-                antialiased;
-
-            overflow-x:
-                hidden;
-
+            background: var(--cream);
+            color: var(--brown);
+            font-family: "Montserrat", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-
 
         body.locked {
-
-            overflow:
-                hidden;
-
+            overflow: hidden;
         }
-
 
         img {
-
-            max-width:
-                100%;
-
-            display:
-                block;
-
+            display: block;
+            max-width: 100%;
         }
-
 
         button,
         input,
-        textarea {
-
-            font-family:
-                inherit;
-
+        textarea,
+        select {
+            font-family: inherit;
         }
-
 
         button {
-
-            cursor:
-                pointer;
-
+            cursor: pointer;
         }
 
-
         a {
-
-            color:
-                inherit;
-
-            text-decoration:
-                none;
-
+            color: inherit;
+            text-decoration: none;
         }
 
 
@@ -172,101 +116,206 @@
         ====================================================== */
 
         .preloader {
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            z-index:
-                9999;
-
-            background:
-                #f8f1ed;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            transition:
-                opacity .8s ease,
-                visibility .8s ease;
-
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
         }
-
 
         .preloader.hidden {
-
-            opacity:
-                0;
-
-            visibility:
-                hidden;
-
+            opacity: 0;
+            visibility: hidden;
         }
-
 
         .loader-content {
-
-            text-align:
-                center;
-
+            text-align: center;
         }
-
 
         .loader-names {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                38px;
-
-            color:
-                var(--brown);
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 40px;
+            font-weight: 500;
         }
-
 
         .loader-line {
+            width: 45px;
+            height: 1px;
+            background: var(--gold);
+            margin: 15px auto;
+        }
 
-            width:
-                45px;
-
-            height:
-                1px;
-
-            background:
-                var(--gold);
-
-            margin:
-                14px auto;
-
+        .loader-text {
+            font-size: 8px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--brown-light);
         }
 
 
-        .loader-text {
+        /* =====================================================
+           OPENING COVER
+        ====================================================== */
 
-            font-size:
-                8px;
+        .opening {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
 
-            letter-spacing:
-                4px;
+        .opening.opened {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
 
-            text-transform:
-                uppercase;
+        .opening::before {
+            content: "";
+            position: absolute;
+            inset: 25px;
+            border: 1px solid rgba(183, 154, 115, .3);
+            pointer-events: none;
+        }
 
-            color:
-                var(--brown-light);
+        .opening-content {
+            position: relative;
+            z-index: 3;
+            width: min(90%, 600px);
+            text-align: center;
+        }
 
+        .opening-small {
+            font-size: 9px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--rose-dark);
+            margin-bottom: 20px;
+        }
+
+        .opening-names {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(55px, 11vw, 90px);
+            line-height: .82;
+            font-weight: 500;
+        }
+
+        .opening-amp {
+            display: block;
+            font-size: .4em;
+            line-height: 1.5;
+            color: var(--rose);
+        }
+
+        .opening-date {
+            margin-top: 25px;
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: var(--brown-light);
+        }
+
+        .open-button {
+            position: relative;
+            margin-top: 42px;
+            padding: 15px 35px;
+            min-width: 190px;
+            border: 1px solid rgba(173, 115, 124, .45);
+            border-radius: 100px;
+            background: rgba(255, 255, 255, .45);
+            color: var(--brown);
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: transform .3s ease, background .3s ease, color .3s ease;
+        }
+
+        .open-button:hover {
+            transform: translateY(-3px);
+            background: var(--rose-dark);
+            color: white;
+        }
+
+        .opening-decoration {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(183, 154, 115, .15);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .opening-decoration::before {
+            content: "";
+            position: absolute;
+            inset: 35px;
+            border: 1px solid rgba(183, 154, 115, .10);
+            border-radius: 50%;
+        }
+
+
+        /* =====================================================
+           MUSIC BUTTON
+        ====================================================== */
+
+        .music-button {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 3000;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(255, 255, 255, .65);
+            border-radius: 50%;
+            background: rgba(81, 65, 59, .72);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .5s ease, transform .3s ease;
+        }
+
+        .music-button.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .music-button:hover {
+            transform: scale(1.08);
+        }
+
+        .music-icon {
+            font-size: 17px;
+        }
+
+        .music-button.playing {
+            animation: musicPulse 1.8s ease infinite;
+        }
+
+        @keyframes musicPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(201, 146, 154, .25);
+            }
+
+            50% {
+                box-shadow: 0 0 0 9px rgba(201, 146, 154, 0);
+            }
         }
 
 
@@ -275,151 +324,63 @@
         ====================================================== */
 
         .page {
-
-            width:
-                100%;
-
-            overflow:
-                hidden;
-
+            width: 100%;
+            overflow: hidden;
         }
-
 
         .section {
-
-            width:
-                100%;
-
-            position:
-                relative;
-
-            padding:
-                100px 22px;
-
+            position: relative;
+            width: 100%;
+            padding: 110px 22px;
         }
-
 
         .section-inner {
-
-            width:
-                100%;
-
-            max-width:
-                1100px;
-
-            margin:
-                auto;
-
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
         }
-
 
         .section-label {
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                4px;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--rose-dark);
-
-            margin-bottom:
-                15px;
-
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--rose-dark);
+            margin-bottom: 16px;
         }
-
 
         .section-title {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(42px, 7vw, 68px);
-
-            font-weight:
-                500;
-
-            line-height:
-                .95;
-
-            color:
-                var(--brown);
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(44px, 7vw, 70px);
+            font-weight: 500;
+            line-height: .9;
         }
-
 
         .section-description {
-
-            max-width:
-                560px;
-
-            margin:
-                20px auto 0;
-
-            font-size:
-                12px;
-
-            line-height:
-                2;
-
-            color:
-                var(--brown-light);
-
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 12px;
+            line-height: 2.1;
+            color: var(--brown-light);
         }
-
 
         .ornament {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                10px;
-
-            margin:
-                25px 0;
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 28px 0;
         }
-
 
         .ornament-line {
-
-            width:
-                35px;
-
-            height:
-                1px;
-
-            background:
-                var(--gold);
-
-            opacity:
-                .6;
-
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            opacity: .65;
         }
 
-
         .ornament-heart {
-
-            color:
-                var(--rose);
-
-            font-size:
-                13px;
-
+            color: var(--rose);
+            font-size: 13px;
         }
 
 
@@ -428,233 +389,112 @@
         ====================================================== */
 
         .hero {
-
-            min-height:
-                100svh;
-
-            position:
-                relative;
-
-            display:
-                flex;
-
-            align-items:
-                flex-end;
-
-            justify-content:
-                center;
-
-            overflow:
-                hidden;
-
-            color:
-                #fff;
-
+            min-height: 100svh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
         }
-
 
         .hero-image {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            background-image:
-                linear-gradient(to bottom,
-                    rgba(48, 34, 29, .08),
-                    rgba(48, 34, 29, .22) 45%,
-                    rgba(48, 34, 29, .72)),
+            position: absolute;
+            inset: -4%;
+            background-image: linear-gradient(to bottom,
+                    rgba(40, 25, 20, .05),
+                    rgba(40, 25, 20, .15) 45%,
+                    rgba(40, 25, 20, .78)),
                 url("images/wedding-hero.jpg");
-
-            background-size:
-                cover;
-
-            background-position:
-                center;
-
-            transform:
-                scale(1.03);
-
-            animation:
-                heroZoom 10s ease forwards;
-
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.08);
+            animation: heroZoom 12s ease forwards;
         }
 
-
         @keyframes heroZoom {
-
             from {
-
-                transform:
-                    scale(1.08);
-
+                transform: scale(1.12);
             }
 
             to {
-
-                transform:
-                    scale(1);
-
+                transform: scale(1);
             }
-
         }
-
 
         .hero-content {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-            width:
-                100%;
-
-            max-width:
-                850px;
-
-            text-align:
-                center;
-
-            padding:
-                70px 20px 75px;
-
-            animation:
-                fadeUp 1.2s ease .4s both;
-
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            padding: 80px 20px;
         }
-
 
         .hero-small {
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                5px;
-
-            text-transform:
-                uppercase;
-
-            margin-bottom:
-                25px;
-
-            opacity:
-                .9;
-
+            font-size: 9px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            opacity: .9;
+            margin-bottom: 25px;
+            animation: heroText 1.2s ease .4s both;
         }
-
 
         .hero-names {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(58px,
-                    12vw,
-                    110px);
-
-            line-height:
-                .82;
-
-            font-weight:
-                500;
-
-            letter-spacing:
-                -2px;
-
-            text-shadow:
-                0 4px 25px rgba(0, 0, 0, .15);
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(60px, 12vw, 115px);
+            font-weight: 500;
+            line-height: .78;
+            letter-spacing: -2px;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, .2);
+            animation: heroText 1.3s ease .6s both;
         }
-
 
         .hero-amp {
-
-            display:
-                block;
-
-            font-size:
-                .38em;
-
-            line-height:
-                1.5;
-
-            font-weight:
-                400;
-
-            letter-spacing:
-                0;
-
+            display: block;
+            font-size: .38em;
+            line-height: 1.5;
+            font-weight: 400;
+            letter-spacing: 0;
         }
-
 
         .hero-date {
-
-            margin-top:
-                30px;
-
-            font-size:
-                10px;
-
-            letter-spacing:
-                4px;
-
-            text-transform:
-                uppercase;
-
+            margin-top: 30px;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: heroText 1.2s ease .8s both;
         }
-
 
         .hero-scroll {
-
-            margin-top:
-                38px;
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            font-size:
-                8px;
-
-            letter-spacing:
-                3px;
-
-            text-transform:
-                uppercase;
-
-            opacity:
-                .75;
-
+            margin-top: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: .75;
+            animation: heroText 1.2s ease 1s both;
         }
 
-
         .hero-scroll-line {
+            width: 35px;
+            height: 1px;
+            background: rgba(255, 255, 255, .7);
+        }
 
-            width:
-                35px;
+        @keyframes heroText {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
 
-            height:
-                1px;
-
-            background:
-                rgba(255, 255, 255, .7);
-
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
 
@@ -663,84 +503,35 @@
         ====================================================== */
 
         .intro {
-
-            text-align:
-                center;
-
-            background:
-                var(--paper);
-
+            text-align: center;
+            background: var(--paper);
         }
-
 
         .intro-inner {
-
-            max-width:
-                750px;
-
-            margin:
-                auto;
-
+            max-width: 760px;
+            margin: auto;
         }
-
 
         .intro-title {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(40px,
-                    7vw,
-                    62px);
-
-            font-weight:
-                500;
-
-            line-height:
-                1;
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(42px, 7vw, 65px);
+            line-height: .95;
+            font-weight: 500;
         }
-
 
         .intro-text {
-
-            max-width:
-                610px;
-
-            margin:
-                30px auto 0;
-
-            font-size:
-                13px;
-
-            line-height:
-                2.15;
-
-            color:
-                var(--brown-light);
-
+            max-width: 620px;
+            margin: 30px auto 0;
+            font-size: 13px;
+            line-height: 2.15;
+            color: var(--brown-light);
         }
 
-
         .intro-signature {
-
-            margin-top:
-                30px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                23px;
-
-            color:
-                var(--rose-dark);
-
+            margin-top: 32px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 25px;
+            color: var(--rose-dark);
         }
 
 
@@ -749,424 +540,59 @@
         ====================================================== */
 
         .date-section {
-
-            background:
-                var(--cream);
-
-            text-align:
-                center;
-
+            background: var(--cream);
+            text-align: center;
         }
 
-
-        .date-grid {
-
-            margin:
-                55px auto 0;
-
-            max-width:
-                850px;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr auto 1fr;
-
-            align-items:
-                center;
-
-            gap:
-                35px;
-
+        .date-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 55px;
         }
 
-
-        .date-block {
-
-            padding:
-                20px;
-
+        .date-circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 250, 247, .55);
+            border: 1px solid rgba(183, 154, 115, .45);
+            box-shadow: 0 20px 50px rgba(70, 48, 40, .08);
         }
 
-
-        .date-label {
-
-            font-size:
-                8px;
-
-            letter-spacing:
-                3px;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--brown-light);
-
-            margin-bottom:
-                10px;
-
+        .date-circle-day {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 56px;
+            line-height: .8;
         }
 
-
-        .date-value {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                32px;
-
-            color:
-                var(--brown);
-
+        .date-circle-month {
+            margin-top: 9px;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rose-dark);
         }
 
-
-        .date-main {
-
-            width:
-                145px;
-
-            height:
-                145px;
-
-            border:
-                1px solid rgba(184, 154, 114, .45);
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                rgba(255, 250, 247, .6);
-
-            box-shadow:
-                0 15px 40px rgba(90, 65, 55, .07);
-
+        .date-circle-label {
+            margin-top: 8px;
+            font-size: 7px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brown-light);
         }
 
-
-        .date-day {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                62px;
-
-            line-height:
-                .8;
-
-        }
-
-
-        .date-month {
-
-            margin-top:
-                10px;
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                3px;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--rose-dark);
-
-        }
-
-
-        /* =====================================================
-           STORY
-        ====================================================== */
-
-        .story {
-
-            background:
-                var(--paper);
-
-        }
-
-
-        .story-grid {
-
-            max-width:
-                980px;
-
-            margin:
-                auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                70px;
-
-            align-items:
-                center;
-
-        }
-
-
-        .story-image {
-
-            position:
-                relative;
-
-        }
-
-
-        .story-image img {
-
-            width:
-                100%;
-
-            aspect-ratio:
-                4 / 5;
-
-            object-fit:
-                cover;
-
-            box-shadow:
-                20px 20px 0 var(--cream-dark);
-
-        }
-
-
-        .story-content {
-
-            padding:
-                20px 0;
-
-        }
-
-
-        .story-title {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(42px,
-                    6vw,
-                    62px);
-
-            line-height:
-                .95;
-
-            font-weight:
-                500;
-
-        }
-
-
-        .story-text {
-
-            margin-top:
-                25px;
-
-            font-size:
-                12px;
-
-            line-height:
-                2.1;
-
-            color:
-                var(--brown-light);
-
-        }
-
-
-        .story-highlight {
-
-            margin-top:
-                25px;
-
-            padding-left:
-                18px;
-
-            border-left:
-                1px solid var(--rose);
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                20px;
-
-            line-height:
-                1.5;
-
-            color:
-                var(--brown);
-
-        }
-
-
-        /* =====================================================
-           GALLERY
-        ====================================================== */
-
-        .gallery {
-
-            background:
-                var(--cream);
-
-        }
-
-
-        .gallery-heading {
-
-            text-align:
-                center;
-
-            margin-bottom:
-                50px;
-
-        }
-
-
-        .gallery-grid {
-
-            max-width:
-                1000px;
-
-            margin:
-                auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1.15fr .85fr;
-
-            grid-template-rows:
-                280px 280px;
-
-            gap:
-                12px;
-
-        }
-
-
-        .gallery-item {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            cursor:
-                pointer;
-
-            background:
-                #e8ddd7;
-
-        }
-
-
-        .gallery-item:first-child {
-
-            grid-row:
-                span 2;
-
-        }
-
-
-        .gallery-item img {
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            object-fit:
-                cover;
-
-            transition:
-                transform .8s ease;
-
-        }
-
-
-        .gallery-item:hover img {
-
-            transform:
-                scale(1.05);
-
-        }
-
-
-        .gallery-overlay {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                rgba(60, 40, 35, .15);
-
-            opacity:
-                0;
-
-            transition:
-                opacity .3s ease;
-
-            color:
-                white;
-
-            font-size:
-                25px;
-
-        }
-
-
-        .gallery-item:hover .gallery-overlay {
-
-            opacity:
-                1;
-
+        .date-divider {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 30px;
+            color: var(--rose);
         }
 
 
@@ -1175,150 +601,393 @@
         ====================================================== */
 
         .events {
-
-            background:
-                var(--paper);
-
-            text-align:
-                center;
-
+            background: var(--paper);
+            text-align: center;
         }
-
 
         .event-list {
-
-            max-width:
-                800px;
-
-            margin:
-                55px auto 0;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap:
-                20px;
-
+            max-width: 1050px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            align-items: stretch;
         }
-
 
         .event-card {
-
-            padding:
-                45px 30px;
-
-            border:
-                1px solid var(--line);
-
-            background:
-                rgba(255, 255, 255, .35);
-
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease;
-
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 35px 45px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .45);
+            overflow: hidden;
+            transition: transform .4s ease, box-shadow .4s ease;
         }
 
+        .event-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+            transform: translateX(-50%);
+        }
 
         .event-card:hover {
-
-            transform:
-                translateY(-5px);
-
-            box-shadow:
-                0 15px 40px rgba(70, 50, 40, .08);
-
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(70, 48, 40, .09);
         }
 
-
-        .event-icon {
-
-            width:
-                46px;
-
-            height:
-                46px;
-
-            border-radius:
-                50%;
-
-            margin:
-                0 auto 20px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                #f6e8e8;
-
-            color:
-                var(--rose-dark);
-
-            font-size:
-                18px;
-
+        .event-side {
+            font-size: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rose-dark);
+            margin-bottom: 12px;
         }
 
+        .event-entry {
+            margin-top: 26px;
+        }
+
+        .event-entry:first-of-type {
+            margin-top: 0;
+        }
+
+        .event-divider {
+            width: 32px;
+            height: 1px;
+            background: var(--line);
+            margin: 30px auto;
+        }
 
         .event-name {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                30px;
-
-            font-weight:
-                600;
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 34px;
+            font-weight: 500;
         }
 
+        .event-date {
+            margin-top: 12px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--brown-light);
+        }
 
         .event-time {
+            margin-top: 8px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 27px;
+            color: var(--rose-dark);
+        }
 
-            margin-top:
-                13px;
+        .event-address {
+            margin-top: 18px;
+            font-size: 11px;
+            line-height: 1.9;
+            color: var(--brown-light);
+        }
 
-            font-size:
-                10px;
+        .event-button {
+            display: inline-flex;
+            align-self: center;
+            margin-top: 28px;
+            padding: 11px 22px;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            font-size: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all .3s ease;
+        }
 
-            letter-spacing:
-                2px;
-
-            color:
-                var(--rose-dark);
-
-            text-transform:
-                uppercase;
-
+        .event-button:hover {
+            background: var(--brown);
+            color: white;
         }
 
 
-        .event-address {
+        /* =====================================================
+           COUNTDOWN
+        ====================================================== */
 
-            margin-top:
-                16px;
+        .countdown-section {
+            background: var(--cream-dark);
+            text-align: center;
+        }
 
-            font-size:
-                11px;
+        .countdown-grid {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
 
-            line-height:
-                1.8;
+        .countdown-card {
+            padding: 42px 25px;
+            background: rgba(255, 250, 247, .7);
+            border: 1px solid rgba(183, 154, 115, .2);
+        }
 
-            color:
-                var(--brown-light);
+        .countdown-title {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 30px;
+            font-weight: 500;
+        }
 
+        .countdown-sub {
+            margin-top: 8px;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+        }
+
+        .countdown {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .countdown-number {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 42px;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            margin-top: 6px;
+            font-size: 7px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+        }
+
+        .countdown-finished {
+            margin-top: 30px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 25px;
+            color: var(--rose-dark);
+        }
+
+
+        /* =====================================================
+           STORY
+        ====================================================== */
+
+        .story {
+            background: var(--paper);
+        }
+
+        .story-grid {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-image {
+            position: relative;
+            padding: 0 12px 12px 0;
+        }
+
+        .story-image::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 90%;
+            height: 90%;
+            border: 1px solid var(--gold-light);
+            z-index: 0;
+        }
+
+        .story-image img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            box-shadow: 0 25px 55px rgba(70, 48, 40, .12);
+        }
+
+        .story-content {
+            padding: 20px 0;
+        }
+
+        .story-title {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(42px, 6vw, 64px);
+            line-height: .9;
+            font-weight: 500;
+        }
+
+        .story-text {
+            margin-top: 28px;
+            font-size: 12px;
+            line-height: 2.1;
+            color: var(--brown-light);
+        }
+
+        .story-highlight {
+            margin-top: 28px;
+            padding: 18px 0 18px 20px;
+            border-left: 1px solid var(--rose);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 21px;
+            line-height: 1.45;
+        }
+
+
+        /* =====================================================
+           GALLERY
+        ====================================================== */
+
+        .gallery {
+            background: var(--cream);
+        }
+
+        .gallery-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .gallery-grid {
+            max-width: 1050px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            grid-template-rows: 310px 310px;
+            gap: 12px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #e8ddd7;
+        }
+
+        .gallery-item:first-child {
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(.22, .61, .36, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+
+        /* =====================================================
+           GALLERY CURTAIN EFFECT
+        ====================================================== */
+
+        .gallery-item::before,
+        .gallery-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: var(--cream);
+            z-index: 2;
+            transition: transform 1.2s cubic-bezier(.77, 0, .18, 1);
+        }
+
+        .gallery-item::before {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .gallery-item::after {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .gallery-item.visible::before {
+            transform: translateX(-101%);
+        }
+
+        .gallery-item.visible::after {
+            transform: translateX(101%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(60, 40, 35, .18);
+            opacity: 0;
+            transition: opacity .4s ease;
+            color: white;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 28px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           PARALLAX PHOTO
+        ====================================================== */
+
+        .photo-break {
+            position: relative;
+            min-height: 60svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .photo-break-image {
+            position: absolute;
+            inset: -10% 0;
+            background: linear-gradient(rgba(40, 25, 20, .25),
+                    rgba(40, 25, 20, .45)),
+                url("images/photo-5.jpg");
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.05);
+        }
+
+        .photo-break-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+        }
+
+        .photo-break-title {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(45px, 8vw, 80px);
+            line-height: .9;
+        }
+
+        .photo-break-text {
+            margin-top: 20px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
 
@@ -1327,106 +996,43 @@
         ====================================================== */
 
         .location-section {
-
-            background:
-                var(--cream);
-
-            text-align:
-                center;
-
+            background: var(--paper);
+            text-align: center;
         }
-
 
         #map {
-
-            width:
-                100%;
-
-            height:
-                430px;
-
-            margin-top:
-                45px;
-
-            border-radius:
-                4px;
-
-            overflow:
-                hidden;
-
-            box-shadow:
-                0 20px 50px rgba(65, 45, 35, .10);
-
+            width: 100%;
+            height: 430px;
+            margin-top: 50px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 20px 55px rgba(65, 45, 35, .10);
         }
-
 
         .location-address {
-
-            margin-top:
-                20px;
-
-            font-size:
-                12px;
-
-            color:
-                var(--brown-light);
-
-            line-height:
-                1.8;
-
+            margin-top: 22px;
+            font-size: 12px;
+            line-height: 1.9;
+            color: var(--brown-light);
         }
-
 
         .direction-link {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                8px;
-
-            margin-top:
-                22px;
-
-            padding:
-                14px 28px;
-
-            border-radius:
-                50px;
-
-            background:
-                var(--brown);
-
-            color:
-                white;
-
-            font-size:
-                10px;
-
-            letter-spacing:
-                1px;
-
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease;
-
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: var(--brown);
+            color: white;
+            font-size: 9px;
+            letter-spacing: 1px;
+            transition: all .3s ease;
         }
 
-
         .direction-link:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 10px 25px rgba(70, 50, 40, .18);
-
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(70, 50, 40, .2);
         }
 
 
@@ -1435,374 +1041,155 @@
         ====================================================== */
 
         .wishes {
-
-            background:
-                var(--paper);
-
+            background: var(--cream);
         }
-
 
         .wishes-heading {
-
-            text-align:
-                center;
-
+            text-align: center;
         }
-
 
         .wish-form {
-
-            max-width:
-                650px;
-
-            margin:
-                50px auto 0;
-
+            max-width: 650px;
+            margin: 50px auto 0;
         }
-
 
         .form-row {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                12px;
-
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
-
 
         .field {
-
-            width:
-                100%;
-
-            border:
-                1px solid var(--line);
-
-            background:
-                rgba(255, 255, 255, .55);
-
-            padding:
-                14px 15px;
-
-            outline:
-                none;
-
-            font-size:
-                11px;
-
-            color:
-                var(--brown);
-
-            transition:
-                border-color .25s ease;
-
+            width: 100%;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .55);
+            padding: 15px;
+            outline: none;
+            font-size: 11px;
+            color: var(--brown);
+            transition: border-color .3s ease, background .3s ease;
         }
-
 
         .field:focus {
-
-            border-color:
-                var(--rose);
-
+            border-color: var(--rose);
+            background: white;
         }
-
 
         textarea.field {
-
-            min-height:
-                130px;
-
-            margin-top:
-                12px;
-
-            resize:
-                vertical;
-
+            min-height: 135px;
+            margin-top: 12px;
+            resize: vertical;
         }
-
 
         .wish-button {
-
-            margin-top:
-                15px;
-
-            width:
-                100%;
-
-            min-height:
-                50px;
-
-            border:
-                0;
-
-            border-radius:
-                50px;
-
-            background:
-                var(--rose);
-
-            color:
-                white;
-
-            font-size:
-                10px;
-
-            font-weight:
-                600;
-
-            letter-spacing:
-                1px;
-
-            transition:
-                transform .25s ease,
-                background .25s ease;
-
+            width: 100%;
+            min-height: 50px;
+            margin-top: 15px;
+            border: 0;
+            border-radius: 50px;
+            background: var(--rose);
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all .3s ease;
         }
-
 
         .wish-button:hover {
-
-            background:
-                var(--rose-dark);
-
-            transform:
-                translateY(-2px);
-
+            background: var(--rose-dark);
+            transform: translateY(-2px);
         }
-
 
         .wish-list {
-
-            max-width:
-                750px;
-
-            margin:
-                50px auto 0;
-
+            max-width: 750px;
+            margin: 55px auto 0;
         }
-
 
         .wish-item {
-
-            padding:
-                22px 0;
-
-            border-bottom:
-                1px solid var(--line);
-
-            text-align:
-                left;
-
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
         }
-
 
         .wish-author {
-
-            font-size:
-                10px;
-
-            font-weight:
-                600;
-
-            color:
-                var(--rose-dark);
-
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--rose-dark);
         }
 
-
         .wish-message {
-
-            margin-top:
-                8px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                20px;
-
-            line-height:
-                1.45;
-
-            color:
-                var(--brown);
-
+            margin-top: 8px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 21px;
+            line-height: 1.45;
         }
 
 
         /* =====================================================
-           QR SECTION
+           GIFT
         ====================================================== */
 
         .gift {
-
-            background:
-                linear-gradient(145deg,
-                    #f7e9e7,
-                    #f4e1e0);
-
-            text-align:
-                center;
-
-            overflow:
-                hidden;
-
+            background: linear-gradient(145deg, #f7e9e7, #f2dedc);
+            text-align: center;
+            overflow: hidden;
         }
-
 
         .gift::before {
-
-            content:
-                "♡";
-
-            position:
-                absolute;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                300px;
-
-            color:
-                rgba(255, 255, 255, .35);
-
-            right:
-                -80px;
-
-            top:
-                -80px;
-
-            pointer-events:
-                none;
-
+            content: "♡";
+            position: absolute;
+            right: -90px;
+            top: -100px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 350px;
+            color: rgba(255, 255, 255, .35);
+            pointer-events: none;
         }
-
 
         .gift-inner {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-            max-width:
-                760px;
-
-            margin:
-                auto;
-
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            margin: auto;
         }
-
 
         .gift-title {
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(45px,
-                    7vw,
-                    68px);
-
-            font-weight:
-                500;
-
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(48px, 7vw, 72px);
+            font-weight: 500;
         }
-
 
         .gift-text {
-
-            max-width:
-                580px;
-
-            margin:
-                22px auto 0;
-
-            font-size:
-                12px;
-
-            line-height:
-                2;
-
-            color:
-                #856d69;
-
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 12px;
+            line-height: 2;
+            color: #806c67;
         }
-
 
         .gift-buttons {
-
-            margin-top:
-                35px;
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-
-            gap:
-                12px;
-
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
         }
-
 
         .gift-person-button {
-
-            min-width:
-                150px;
-
-            min-height:
-                48px;
-
-            border:
-                1px solid rgba(170, 115, 125, .35);
-
-            border-radius:
-                50px;
-
-            background:
-                rgba(255, 255, 255, .55);
-
-            color:
-                #765e5a;
-
-            font-size:
-                10px;
-
-            transition:
-                background .25s ease,
-                color .25s ease,
-                transform .25s ease;
-
+            min-width: 165px;
+            min-height: 50px;
+            border: 1px solid rgba(170, 115, 125, .35);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, .55);
+            color: #765e5a;
+            font-size: 9px;
+            letter-spacing: .5px;
+            transition: all .3s ease;
         }
 
-
-        .gift-person-button:hover,
-        .gift-person-button.active {
-
-            background:
-                var(--rose-dark);
-
-            color:
-                white;
-
-            transform:
-                translateY(-2px);
-
+        .gift-person-button:hover {
+            background: var(--rose-dark);
+            color: white;
+            transform: translateY(-3px);
         }
 
 
@@ -1811,282 +1198,116 @@
         ====================================================== */
 
         .qr-modal {
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            z-index:
-                5000;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                20px;
-
-            background:
-                rgba(45, 30, 27, .55);
-
-            backdrop-filter:
-                blur(10px);
-
-            -webkit-backdrop-filter:
-                blur(10px);
-
-            opacity:
-                0;
-
-            visibility:
-                hidden;
-
-            transition:
-                opacity .3s ease,
-                visibility .3s ease;
-
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(45, 30, 27, .58);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .35s ease, visibility .35s ease;
         }
-
 
         .qr-modal.show {
-
-            opacity:
-                1;
-
-            visibility:
-                visible;
-
+            opacity: 1;
+            visibility: visible;
         }
-
 
         .qr-box {
-
-            width:
-                100%;
-
-            max-width:
-                380px;
-
-            padding:
-                38px 25px 30px;
-
-            background:
-                var(--paper);
-
-            text-align:
-                center;
-
-            position:
-                relative;
-
-            box-shadow:
-                0 25px 70px rgba(0, 0, 0, .22);
-
-            transform:
-                translateY(20px);
-
-            transition:
-                transform .4s ease;
-
+            width: 100%;
+            max-width: 380px;
+            padding: 38px 25px 30px;
+            background: var(--paper);
+            text-align: center;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .25);
+            transform: translateY(25px) scale(.96);
+            transition: transform .4s cubic-bezier(.22, .61, .36, 1);
         }
-
 
         .qr-modal.show .qr-box {
-
-            transform:
-                translateY(0);
-
+            transform: translateY(0) scale(1);
         }
-
 
         .qr-close {
-
-            position:
-                absolute;
-
-            top:
-                13px;
-
-            right:
-                16px;
-
-            border:
-                0;
-
-            background:
-                none;
-
-            font-size:
-                22px;
-
-            color:
-                #998680;
-
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            border: 0;
+            background: none;
+            font-size: 24px;
+            color: #998680;
         }
-
 
         .qr-label {
-
-            font-size:
-                8px;
-
-            letter-spacing:
-                3px;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--rose-dark);
-
+            font-size: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rose-dark);
         }
-
 
         .qr-name {
-
-            margin-top:
-                8px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                35px;
-
-            font-weight:
-                500;
-
+            margin-top: 8px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 36px;
         }
-
 
         .qr-frame {
-
-            width:
-                220px;
-
-            height:
-                220px;
-
-            margin:
-                25px auto;
-
-            padding:
-                12px;
-
-            background:
-                white;
-
-            border:
-                1px solid rgba(184, 154, 114, .3);
-
+            width: 220px;
+            height: 220px;
+            margin: 25px auto;
+            padding: 12px;
+            background: white;
+            border: 1px solid rgba(184, 154, 114, .3);
         }
-
 
         .qr-frame img {
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            object-fit:
-                contain;
-
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-
 
         .qr-bank {
-
-            font-size:
-                10px;
-
-            color:
-                var(--brown-light);
-
+            font-size: 10px;
+            color: var(--brown-light);
         }
-
 
         .qr-account {
-
-            margin-top:
-                5px;
-
-            font-size:
-                12px;
-
-            font-weight:
-                600;
-
+            margin-top: 5px;
+            font-size: 12px;
+            font-weight: 600;
         }
-
 
         .qr-note {
-
-            margin-top:
-                15px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                17px;
-
-            color:
-                var(--brown-light);
-
+            max-width: 290px;
+            margin: 16px auto 0;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 17px;
+            line-height: 1.4;
+            color: var(--brown-light);
         }
 
-
         .qr-download {
+            margin-top: 20px;
+            min-height: 44px;
+            padding: 0 23px;
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--brown);
+            font-size: 9px;
+            letter-spacing: 1px;
+            transition: all .3s ease;
+        }
 
-            margin-top:
-                20px;
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            min-height:
-                44px;
-
-            padding:
-                0 22px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius:
-                50px;
-
-            background:
-                transparent;
-
-            color:
-                var(--brown);
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                1px;
-
+        .qr-download:hover {
+            background: var(--brown);
+            color: white;
         }
 
 
@@ -2095,121 +1316,51 @@
         ====================================================== */
 
         .closing {
-
-            min-height:
-                80svh;
-
-            position:
-                relative;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-
-            color:
-                white;
-
-            overflow:
-                hidden;
-
+            min-height: 85svh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
         }
-
 
         .closing-image {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            background-image:
-                linear-gradient(rgba(45, 30, 25, .25),
-                    rgba(45, 30, 25, .55)),
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(45, 30, 25, .22),
+                    rgba(45, 30, 25, .65)),
                 url("images/wedding-final.jpg");
-
-            background-size:
-                cover;
-
-            background-position:
-                center;
-
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.04);
         }
-
 
         .closing-content {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-            padding:
-                40px 20px;
-
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
         }
-
 
         .closing-small {
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                4px;
-
-            text-transform:
-                uppercase;
-
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
-
 
         .closing-names {
-
-            margin-top:
-                22px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                clamp(55px,
-                    11vw,
-                    100px);
-
-            line-height:
-                .8;
-
-            font-weight:
-                500;
-
+            margin-top: 25px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(58px, 11vw, 105px);
+            line-height: .78;
+            font-weight: 500;
         }
 
-
         .closing-message {
-
-            margin-top:
-                30px;
-
-            font-family:
-                "Cormorant Garamond",
-                Georgia,
-                serif;
-
-            font-size:
-                22px;
-
+            margin-top: 35px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 23px;
         }
 
 
@@ -2218,28 +1369,13 @@
         ====================================================== */
 
         footer {
-
-            padding:
-                25px 20px;
-
-            background:
-                #493b36;
-
-            color:
-                rgba(255, 255, 255, .65);
-
-            text-align:
-                center;
-
-            font-size:
-                8px;
-
-            letter-spacing:
-                2px;
-
-            text-transform:
-                uppercase;
-
+            padding: 28px 20px;
+            background: #493b36;
+            color: rgba(255, 255, 255, .65);
+            text-align: center;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
 
@@ -2248,145 +1384,176 @@
         ====================================================== */
 
         .lightbox {
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            z-index:
-                6000;
-
-            background:
-                rgba(20, 15, 13, .92);
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                20px;
-
-            opacity:
-                0;
-
-            visibility:
-                hidden;
-
-            transition:
-                opacity .3s ease,
-                visibility .3s ease;
-
+            position: fixed;
+            inset: 0;
+            z-index: 6000;
+            background: rgba(20, 15, 13, .94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s ease;
         }
-
 
         .lightbox.show {
-
-            opacity:
-                1;
-
-            visibility:
-                visible;
-
+            opacity: 1;
+            visibility: visible;
         }
-
 
         .lightbox img {
-
-            max-width:
-                95vw;
-
-            max-height:
-                90vh;
-
-            object-fit:
-                contain;
-
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
         }
 
-
         .lightbox-close {
-
-            position:
-                absolute;
-
-            top:
-                20px;
-
-            right:
-                25px;
-
-            color:
-                white;
-
-            border:
-                0;
-
-            background:
-                none;
-
-            font-size:
-                30px;
-
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            border: 0;
+            background: none;
+            font-size: 30px;
         }
 
 
         /* =====================================================
-           SCROLL REVEAL
+           REVEAL
+           (chạy cả khi kéo xuống lẫn kéo lên — xem phần
+           SCROLL REVEAL trong JS: class .visible được toggle
+           theo IntersectionObserver, không chỉ add một lần)
         ====================================================== */
 
-        .reveal {
-
-            opacity:
-                0;
-
-            transform:
-                translateY(35px);
-
-            transition:
-                opacity .9s ease,
-                transform .9s ease;
-
+        .reveal,
+        .reveal-left,
+        .reveal-right,
+        .reveal-zoom {
+            will-change: opacity, transform, filter;
         }
 
+        .reveal {
+            opacity: 0;
+            transform: translateY(56px);
+            filter: blur(var(--reveal-blur));
+            transition:
+                opacity var(--reveal-duration) var(--reveal-ease),
+                transform var(--reveal-duration) var(--reveal-ease),
+                filter var(--reveal-duration) var(--reveal-ease);
+        }
 
         .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
 
-            opacity:
-                1;
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-70px);
+            filter: blur(var(--reveal-blur));
+            transition:
+                opacity var(--reveal-duration) var(--reveal-ease),
+                transform var(--reveal-duration) var(--reveal-ease),
+                filter var(--reveal-duration) var(--reveal-ease);
+        }
 
-            transform:
-                translateY(0);
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+            filter: blur(0px);
+        }
 
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(70px);
+            filter: blur(var(--reveal-blur));
+            transition:
+                opacity var(--reveal-duration) var(--reveal-ease),
+                transform var(--reveal-duration) var(--reveal-ease),
+                filter var(--reveal-duration) var(--reveal-ease);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+            filter: blur(0px);
+        }
+
+        .reveal-zoom {
+            opacity: 0;
+            transform: scale(.88);
+            filter: blur(var(--reveal-blur));
+            transition:
+                opacity 1.15s var(--reveal-ease),
+                transform 1.2s var(--reveal-ease),
+                filter 1.15s var(--reveal-ease);
+        }
+
+        .reveal-zoom.visible {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0px);
         }
 
 
-        @keyframes fadeUp {
+        /* Hiệu ứng so le (stagger): các thẻ trong cùng một nhóm
+           sẽ "nở" ra lần lượt thay vì bung ra cùng lúc, tạo cảm
+           giác mượt và có nhịp điệu hơn */
 
-            from {
+        .event-list .event-card:nth-child(2),
+        .countdown-grid .countdown-card:nth-child(2) {
+            transition-delay: .12s;
+        }
 
-                opacity:
-                    0;
+        .date-group .date-circle:nth-child(3) {
+            transition-delay: .15s;
+        }
 
-                transform:
-                    translateY(25px);
+        .gallery-grid .gallery-item:nth-child(2) {
+            transition-delay: .08s;
+        }
 
+        .gallery-grid .gallery-item:nth-child(3) {
+            transition-delay: .16s;
+        }
+
+        .gallery-grid .gallery-item:nth-child(4) {
+            transition-delay: .24s;
+        }
+
+        .gallery-grid .gallery-item:nth-child(5) {
+            transition-delay: .32s;
+        }
+
+
+        /* =====================================================
+           SPARKLE (lấp lánh nhẹ nhàng, trang trí)
+        ====================================================== */
+
+        .sparkle {
+            position: absolute;
+            color: var(--gold-light);
+            font-size: 13px;
+            line-height: 1;
+            opacity: 0;
+            pointer-events: none;
+            animation: twinkle 4.8s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(215, 192, 157, .9);
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(.4) rotate(0deg);
             }
 
-            to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0);
-
+            50% {
+                opacity: .9;
+                transform: scale(1) rotate(8deg);
             }
 
         }
@@ -2396,197 +1563,112 @@
            MOBILE
         ====================================================== */
 
-        @media (max-width: 700px) {
+        @media (max-width:700px) {
+
+            :root {
+                --reveal-blur: 5px;
+                --reveal-duration: .85s;
+            }
 
             .section {
-
-                padding:
-                    75px 18px;
-
+                padding: 78px 18px;
             }
 
-
-            .hero {
-
-                min-height:
-                    100svh;
-
+            .opening::before {
+                inset: 15px;
             }
 
+            .opening-decoration {
+                width: 300px;
+                height: 300px;
+            }
 
             .hero-content {
-
-                padding:
-                    50px 15px 55px;
-
+                padding: 55px 15px 65px;
             }
-
 
             .hero-names {
-
-                font-size:
-                    clamp(57px,
-                        16vw,
-                        85px);
-
+                font-size: clamp(58px, 16vw, 88px);
             }
 
-
-            .date-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    5px;
-
+            .date-group {
+                gap: 20px;
             }
 
-
-            .date-main {
-
-                order:
-                    -1;
-
-                margin:
-                    0 auto;
-
+            .date-circle {
+                width: 128px;
+                height: 128px;
             }
 
-
-            .date-block {
-
-                padding:
-                    10px;
-
+            .date-circle-day {
+                font-size: 46px;
             }
-
-
-            .story-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    45px;
-
-            }
-
-
-            .story-image {
-
-                padding-right:
-                    12px;
-
-            }
-
-
-            .story-content {
-
-                padding:
-                    0 5px;
-
-            }
-
-
-            .gallery-grid {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-                grid-template-rows:
-                    250px 180px 180px;
-
-            }
-
-
-            .gallery-item:first-child {
-
-                grid-column:
-                    span 2;
-
-                grid-row:
-                    auto;
-
-            }
-
 
             .event-list {
-
-                grid-template-columns:
-                    1fr;
-
+                grid-template-columns: 1fr;
             }
 
+            .countdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-number {
+                font-size: 36px;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .story-image {
+                padding-right: 10px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 270px 170px 170px;
+            }
+
+            .gallery-item:first-child {
+                grid-column: span 2;
+                grid-row: auto;
+            }
+
+            .photo-break {
+                min-height: 55svh;
+            }
 
             #map {
-
-                height:
-                    350px;
-
+                height: 340px;
             }
-
 
             .form-row {
-
-                grid-template-columns:
-                    1fr;
-
+                grid-template-columns: 1fr;
             }
-
 
             .gift-buttons {
-
-                flex-direction:
-                    column;
-
-                max-width:
-                    280px;
-
-                margin-left:
-                    auto;
-
-                margin-right:
-                    auto;
-
+                flex-direction: column;
+                max-width: 290px;
+                margin-left: auto;
+                margin-right: auto;
             }
-
 
             .gift-person-button {
-
-                width:
-                    100%;
-
+                width: 100%;
             }
-
 
             .qr-box {
-
-                max-width:
-                    340px;
-
-                padding:
-                    35px 20px 25px;
-
+                max-width: 340px;
             }
-
 
             .qr-frame {
-
-                width:
-                    200px;
-
-                height:
-                    200px;
-
+                width: 200px;
+                height: 200px;
             }
 
-
             .closing {
-
-                min-height:
-                    75svh;
-
+                min-height: 75svh;
             }
 
         }
@@ -2596,21 +1678,25 @@
            REDUCED MOTION
         ====================================================== */
 
-        @media (prefers-reduced-motion: reduce) {
+        @media (prefers-reduced-motion:reduce) {
 
             *,
             *::before,
             *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
 
-                scroll-behavior:
-                    auto !important;
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .reveal-zoom {
+                filter: none !important;
+            }
 
-                animation-duration:
-                    .01ms !important;
-
-                transition-duration:
-                    .01ms !important;
-
+            .sparkle {
+                display: none !important;
             }
 
         }
@@ -2645,17 +1731,86 @@
     </div>
 
 
+    <!-- =========================================================
+     OPENING
+========================================================== -->
+
+    <div id="opening" class="opening">
+
+        <div class="opening-decoration"></div>
+
+        <span class="sparkle" style="top:22%; left:18%; animation-delay:.2s;">✦</span>
+        <span class="sparkle" style="top:32%; right:16%; animation-delay:1.6s;">✦</span>
+        <span class="sparkle" style="bottom:26%; left:26%; animation-delay:2.8s;">✦</span>
+        <span class="sparkle" style="bottom:20%; right:22%; animation-delay:3.6s;">✦</span>
+
+        <div class="opening-content">
+
+            <div class="opening-small">
+                The beginning of forever
+            </div>
+
+            <div class="opening-names">
+
+                Minh Thuận
+
+                <span class="opening-amp">
+                    &
+                </span>
+
+                Cẩm Hương
+
+            </div>
+
+            <div class="opening-date">
+                18 &ndash; 20 · 09 · 2026
+            </div>
+
+            <button id="openWedding" class="open-button">
+
+                ♡ &nbsp; Mở thiệp
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+     MUSIC
+========================================================== -->
+
+    <audio id="weddingMusic" loop preload="auto">
+
+        <source src="music/wedding.mp3" type="audio/mpeg">
+
+    </audio>
+
+
+    <button id="musicButton" class="music-button">
+
+        <span class="music-icon">
+            ♫
+        </span>
+
+    </button>
+
 
     <div class="page">
 
 
-        <!-- =====================================================
-         HERO
-    ====================================================== -->
+        <!-- =========================================================
+     HERO
+========================================================== -->
 
         <section class="hero">
 
             <div class="hero-image"></div>
+
+            <span class="sparkle" style="top:18%; left:12%; animation-delay:.4s;">✦</span>
+            <span class="sparkle" style="top:28%; right:14%; animation-delay:2s;">✦</span>
+            <span class="sparkle" style="bottom:30%; left:20%; animation-delay:3.2s;">✦</span>
 
             <div class="hero-content">
 
@@ -2676,7 +1831,7 @@
                 </h1>
 
                 <div class="hero-date">
-                    18 · 01 · 2027
+                    18 &ndash; 20 · 09 · 2026
                 </div>
 
                 <div class="hero-scroll">
@@ -2694,10 +1849,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-         INTRO
-    ====================================================== -->
+        <!-- =========================================================
+     INTRO
+========================================================== -->
 
         <section class="section intro">
 
@@ -2746,10 +1900,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-         DATE
-    ====================================================== -->
+        <!-- =========================================================
+     DATE
+========================================================== -->
 
         <section class="section date-section">
 
@@ -2760,45 +1913,41 @@
                 </div>
 
                 <h2 class="section-title">
-                    Một ngày thật đặc biệt
+                    Hai ngày thật đặc biệt
                 </h2>
 
-                <div class="date-grid">
+                <div class="date-group">
 
-                    <div class="date-block">
+                    <div class="date-circle">
 
-                        <div class="date-label">
-                            Saturday
-                        </div>
-
-                        <div class="date-value">
-                            Thứ Bảy
-                        </div>
-
-                    </div>
-
-
-                    <div class="date-main">
-
-                        <div class="date-day">
+                        <div class="date-circle-day">
                             18
                         </div>
 
-                        <div class="date-month">
-                            January · 2027
+                        <div class="date-circle-month">
+                            September · 2026
+                        </div>
+
+                        <div class="date-circle-label">
+                            Lễ Vu Quy
                         </div>
 
                     </div>
 
+                    <span class="date-divider">&amp;</span>
 
-                    <div class="date-block">
+                    <div class="date-circle">
 
-                        <div class="date-label">
-                            Together
+                        <div class="date-circle-day">
+                            20
                         </div>
 
-                        <div class="date-value">
-                            Forever
+                        <div class="date-circle-month">
+                            September · 2026
+                        </div>
+
+                        <div class="date-circle-label">
+                            Lễ Thành Hôn
                         </div>
 
                     </div>
@@ -2810,31 +1959,340 @@
         </section>
 
 
+        <!-- =========================================================
+     EVENTS
+========================================================== -->
 
-        <!-- =====================================================
-         STORY
-    ====================================================== -->
+        <section class="section events">
+
+            <div class="section-inner">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Wedding details
+                    </div>
+
+                    <h2 class="section-title">
+                        Hai gia đình · Một ngày vui
+                    </h2>
+
+                </div>
+
+
+                <div class="event-list">
+
+
+                    <!-- NHÀ TRAI -->
+
+                    <div class="event-card reveal-left">
+
+                        <div class="event-side">
+                            Nhà trai
+                        </div>
+
+                        <div class="event-entry">
+
+                            <h3 class="event-name">
+                                Lễ Thành Hôn
+                            </h3>
+
+                            <div class="event-date">
+                                Chủ Nhật · 20.09.2026
+                            </div>
+
+                            <div class="event-time">
+                                09:00
+                            </div>
+
+                            <p class="event-address">
+
+                                Tại tư gia nhà trai
+
+                                <br>
+
+                                [Địa chỉ]
+
+                            </p>
+
+                        </div>
+
+                        <div class="event-divider"></div>
+
+                        <div class="event-entry">
+
+                            <h3 class="event-name">
+                                Tiệc Cưới
+                            </h3>
+
+                            <div class="event-date">
+                                Chủ Nhật · 20.09.2026
+                            </div>
+
+                            <div class="event-time">
+                                11:00
+                            </div>
+
+                            <p class="event-address">
+
+                                Nhà Văn Hóa Thôn Phương Nghệ 2
+
+                                <br>
+
+                                xã Xuân Phú, TP. Đà Nẵng
+
+                            </p>
+
+                        </div>
+
+                        <a href="#map" class="event-button">
+
+                            Xem địa điểm
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- NHÀ GÁI -->
+
+                    <div class="event-card reveal-right">
+
+                        <div class="event-side">
+                            Nhà gái
+                        </div>
+
+                        <div class="event-entry">
+
+                            <h3 class="event-name">
+                                Lễ Vu Quy
+                            </h3>
+
+                            <div class="event-date">
+                                Thứ Sáu · 18.09.2026
+                            </div>
+
+                            <div class="event-time">
+                                09:00
+                            </div>
+
+                            <p class="event-address">
+
+                                Tại tư gia nhà gái
+
+                                <br>
+
+                                [Địa chỉ]
+
+                            </p>
+
+                        </div>
+
+                        <a href="#" class="event-button">
+
+                            Xem địa điểm
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+     COUNTDOWN
+========================================================== -->
+
+        <section class="section countdown-section">
+
+            <div class="section-inner">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Counting the moments
+                    </div>
+
+                    <h2 class="section-title">
+                        Đếm ngược đến ngày vui
+                    </h2>
+
+                </div>
+
+
+                <div class="countdown-grid">
+
+
+                    <!-- NHÀ TRAI -->
+
+                    <div class="countdown-card reveal-left">
+
+                        <div class="countdown-title">
+                            Ngày vui nhà trai
+                        </div>
+
+                        <div class="countdown-sub">
+                            20 · 09 · 2026
+                        </div>
+
+                        <div id="countdownGroom" class="countdown">
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="days">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Ngày
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="hours">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Giờ
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="minutes">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Phút
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="seconds">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Giây
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NHÀ GÁI -->
+
+                    <div class="countdown-card reveal-right">
+
+                        <div class="countdown-title">
+                            Ngày vui nhà gái
+                        </div>
+
+                        <div class="countdown-sub">
+                            18 · 09 · 2026
+                        </div>
+
+                        <div id="countdownBride" class="countdown">
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="days">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Ngày
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="hours">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Giờ
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="minutes">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Phút
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="countdown-number" data-unit="seconds">
+                                    00
+                                </div>
+
+                                <div class="countdown-label">
+                                    Giây
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+     STORY
+========================================================== -->
 
         <section class="section story">
 
             <div class="story-grid">
 
 
-                <div class="story-image reveal">
+                <div class="story-image reveal-left">
 
                     <img src="images/story.jpg" alt="Minh Thuận và Cẩm Hương">
 
                 </div>
 
 
-                <div class="story-content reveal">
+                <div class="story-content reveal-right">
 
                     <div class="section-label">
                         Our story
                     </div>
 
                     <h2 class="story-title">
-                        Từ một cuộc gặp gỡ<br>
+                        Từ một cuộc gặp gỡ
                         đến một đời bên nhau
                     </h2>
 
@@ -2875,10 +2333,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-         GALLERY
-    ====================================================== -->
+        <!-- =========================================================
+     GALLERY
+========================================================== -->
 
         <section class="section gallery">
 
@@ -2892,13 +2349,20 @@
                     Những khoảnh khắc yêu thương
                 </h2>
 
+                <p class="section-description">
+
+                    Một vài khoảnh khắc nhỏ,
+                    lưu giữ một hành trình thật dài.
+
+                </p>
+
             </div>
 
 
             <div class="gallery-grid">
 
 
-                <div class="gallery-item">
+                <div class="gallery-item reveal-zoom">
 
                     <img src="images/photo-1.jpg" alt="Wedding photo 1">
 
@@ -2909,7 +2373,7 @@
                 </div>
 
 
-                <div class="gallery-item">
+                <div class="gallery-item reveal-zoom">
 
                     <img src="images/photo-2.jpg" alt="Wedding photo 2">
 
@@ -2920,7 +2384,7 @@
                 </div>
 
 
-                <div class="gallery-item">
+                <div class="gallery-item reveal-zoom">
 
                     <img src="images/photo-3.jpg" alt="Wedding photo 3">
 
@@ -2931,7 +2395,7 @@
                 </div>
 
 
-                <div class="gallery-item">
+                <div class="gallery-item reveal-zoom">
 
                     <img src="images/photo-4.jpg" alt="Wedding photo 4">
 
@@ -2942,7 +2406,7 @@
                 </div>
 
 
-                <div class="gallery-item">
+                <div class="gallery-item reveal-zoom">
 
                     <img src="images/photo-5.jpg" alt="Wedding photo 5">
 
@@ -2958,82 +2422,26 @@
         </section>
 
 
+        <!-- =========================================================
+     PHOTO BREAK
+========================================================== -->
 
-        <!-- =====================================================
-         EVENTS
-    ====================================================== -->
+        <section class="photo-break">
 
-        <section class="section events">
+            <div class="photo-break-image"></div>
 
-            <div class="section-inner reveal">
+            <div class="photo-break-content reveal">
 
-                <div class="section-label">
-                    Wedding details
+                <div class="photo-break-title">
+
+                    Together is
+                    our favorite place
+
                 </div>
 
-                <h2 class="section-title">
-                    Ngày vui của chúng mình
-                </h2>
+                <div class="photo-break-text">
 
-
-                <div class="event-list">
-
-
-                    <!-- TIỆC CƯỚI -->
-
-                    <div class="event-card">
-
-                        <div class="event-icon">
-                            ♡
-                        </div>
-
-                        <h3 class="event-name">
-                            Tiệc cưới
-                        </h3>
-
-                        <div class="event-time">
-                            11:00 · Chủ Nhật
-                        </div>
-
-                        <p class="event-address">
-
-                            Nhà Văn Hóa Thôn Phương Nghệ 2
-
-                            <br>
-
-                            xã Xuân Phú, TP. Đà Nẵng
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- LỄ -->
-
-                    <div class="event-card">
-
-                        <div class="event-icon">
-                            ♥
-                        </div>
-
-                        <h3 class="event-name">
-                            Chung vui
-                        </h3>
-
-                        <div class="event-time">
-                            Cùng gia đình & bạn bè
-                        </div>
-
-                        <p class="event-address">
-
-                            Sự hiện diện của bạn
-                            là niềm vui lớn nhất
-                            đối với chúng mình.
-
-                        </p>
-
-                    </div>
-
+                    Minh Thuận & Cẩm Hương
 
                 </div>
 
@@ -3042,10 +2450,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-         LOCATION
-    ====================================================== -->
+        <!-- =========================================================
+     LOCATION
+========================================================== -->
 
         <section class="section location-section">
 
@@ -3058,6 +2465,11 @@
                 <h2 class="section-title">
                     Hẹn gặp bạn tại đây
                 </h2>
+
+                <p class="section-description">
+                    Bản đồ dưới đây là địa điểm Tiệc Cưới (Nhà Trai),
+                    lúc 11:00 · Chủ Nhật, 20.09.2026.
+                </p>
 
                 <div id="map"></div>
 
@@ -3080,9 +2492,7 @@
 
                 <a id="directionLink" class="direction-link" href="#">
 
-                    ⌖
-
-                    Chỉ đường đến tiệc cưới
+                    ⌖ &nbsp; Chỉ đường đến tiệc cưới
 
                 </a>
 
@@ -3091,14 +2501,14 @@
         </section>
 
 
-
-        <!-- =====================================================
-         WISHES
-    ====================================================== -->
+        <!-- =========================================================
+     WISHES
+========================================================== -->
 
         <section class="section wishes">
 
             <div class="section-inner">
+
 
                 <div class="wishes-heading reveal">
 
@@ -3162,8 +2572,6 @@
 
                 <div id="wishList" class="wish-list">
 
-                    <!-- JS render wishes -->
-
                 </div>
 
             </div>
@@ -3171,10 +2579,9 @@
         </section>
 
 
-
-        <!-- =====================================================
-         GIFT / QR
-    ====================================================== -->
+        <!-- =========================================================
+     GIFT / QR
+========================================================== -->
 
         <section class="section gift">
 
@@ -3219,18 +2626,14 @@
 
                     <button class="gift-person-button" data-person="bride">
 
-                        ♡
-
-                        Gửi tới Cô dâu
+                        ♡ &nbsp; Gửi tới Cô dâu
 
                     </button>
 
 
                     <button class="gift-person-button" data-person="groom">
 
-                        ♡
-
-                        Gửi tới Chú rể
+                        ♡ &nbsp; Gửi tới Chú rể
 
                     </button>
 
@@ -3241,14 +2644,17 @@
         </section>
 
 
-
-        <!-- =====================================================
-         CLOSING
-    ====================================================== -->
+        <!-- =========================================================
+     CLOSING
+========================================================== -->
 
         <section class="closing">
 
             <div class="closing-image"></div>
+
+            <span class="sparkle" style="top:20%; left:16%; animation-delay:.6s;">✦</span>
+            <span class="sparkle" style="top:24%; right:18%; animation-delay:2.4s;">✦</span>
+            <span class="sparkle" style="bottom:24%; left:24%; animation-delay:3.8s;">✦</span>
 
             <div class="closing-content reveal">
 
@@ -3277,7 +2683,6 @@
         </section>
 
 
-
         <footer>
 
             Minh Thuận & Cẩm Hương · Our Wedding
@@ -3288,16 +2693,13 @@
     </div>
 
 
-
     <!-- =========================================================
      QR MODAL
 ========================================================== -->
 
     <div id="qrModal" class="qr-modal">
 
-
         <div class="qr-box">
-
 
             <button id="qrClose" class="qr-close">
 
@@ -3326,12 +2728,10 @@
 
 
             <div id="qrBank" class="qr-bank">
-
             </div>
 
 
             <div id="qrAccount" class="qr-account">
-
             </div>
 
 
@@ -3349,11 +2749,9 @@
 
             </button>
 
-
         </div>
 
     </div>
-
 
 
     <!-- =========================================================
@@ -3362,18 +2760,15 @@
 
     <div id="lightbox" class="lightbox">
 
-
         <button id="lightboxClose" class="lightbox-close">
 
             ×
 
         </button>
 
-
         <img id="lightboxImage" src="" alt="Wedding">
 
     </div>
-
 
 
     <!-- =========================================================
@@ -3384,113 +2779,87 @@
     </script>
 
 
-
     <script>
 
-        /* =====================================================
+
+        /* =========================================================
            WEDDING CONFIGURATION
-    
+
            CHỈ CẦN SỬA PHẦN NÀY
-        ====================================================== */
+        ========================================================= */
 
         const WEDDING = {
 
+            groom: "Minh Thuận",
 
-            /* =================================================
-               CÔ DÂU & CHÚ RỂ
-            ================================================== */
-
-            groom:
-                "Minh Thuận",
-
-            bride:
-                "Cẩm Hương",
+            bride: "Cẩm Hương",
 
 
-            /* =================================================
-               NGÀY CƯỚI
-            ================================================== */
+            /* =====================================================
+               NGÀY GIỜ
 
-            date:
-                "18 · 01 · 2027",
+               LƯU Ý: dùng format YYYY-MM-DDTHH:mm:ss
+            ====================================================== */
 
+            // Nhà trai — Lễ Thành Hôn, dùng để đếm ngược "Ngày vui nhà trai"
+            groomCeremony: "2026-09-20T09:00:00",
 
-            /* =================================================
-               ĐỊA ĐIỂM
-            ================================================== */
+            // Nhà trai — Tiệc Cưới (cùng ngày, sau lễ thành hôn)
+            groomReception: "2026-09-20T11:00:00",
 
-            location:
-                "Nhà Văn Hóa Thôn Phương Nghệ 2",
-
-            address:
-                "xã Xuân Phú, TP. Đà Nẵng",
+            // Nhà gái — Lễ Vu Quy, dùng để đếm ngược "Ngày vui nhà gái"
+            brideEvent: "2026-09-18T09:00:00",
 
 
-            /* =================================================
-               TỌA ĐỘ
-            ================================================== */
+            /* =====================================================
+               ĐỊA ĐIỂM (hiển thị trên bản đồ — hiện là Tiệc Cưới)
+            ====================================================== */
 
-            latitude:
-                15.78354973071366,
+            location: "Nhà Văn Hóa Thôn Phương Nghệ 2",
 
-            longitude:
-                108.29920269592817,
+            address: "xã Xuân Phú, TP. Đà Nẵng",
 
 
-            /* =================================================
-               QR CÔ DÂU
-    
-               Thay bằng file QR thật.
-    
-               Ví dụ:
-    
-               images/qr-bride.png
-            ================================================== */
+            latitude: 15.78354973071366,
+
+            longitude: 108.29920269592817,
+
+
+            /* =====================================================
+               QR
+            ====================================================== */
 
             brideQR: {
 
-                name:
-                    "Cẩm Hương",
+                name: "Cẩm Hương",
 
-                bank:
-                    "Tên ngân hàng",
+                bank: "Tên ngân hàng",
 
-                account:
-                    "0000000000",
+                account: "0000000000",
 
-                qr:
-                    "images/qr-bride.png"
+                qr: "images/qr-bride.png"
 
             },
 
 
-            /* =================================================
-               QR CHÚ RỂ
-            ================================================== */
-
             groomQR: {
 
-                name:
-                    "Minh Thuận",
+                name: "Minh Thuận",
 
-                bank:
-                    "Tên ngân hàng",
+                bank: "Tên ngân hàng",
 
-                account:
-                    "0000000000",
+                account: "0000000000",
 
-                qr:
-                    "images/qr-groom.png"
+                qr: "images/qr-groom.png"
 
             }
 
         };
 
 
-
-        /* =====================================================
+        /* =========================================================
            PRELOADER
-        ====================================================== */
+        ========================================================= */
 
         window.addEventListener(
 
@@ -3509,7 +2878,7 @@
 
                     },
 
-                    900
+                    800
 
                 );
 
@@ -3518,25 +2887,107 @@
         );
 
 
+        /* =========================================================
+           OPEN WEDDING
+        ========================================================= */
 
-        /* =====================================================
-           GOOGLE MAPS DIRECTIONS
-        ====================================================== */
+        const opening =
+            document.getElementById("opening");
+
+        const openWedding =
+            document.getElementById("openWedding");
+
+        const music =
+            document.getElementById("weddingMusic");
+
+        const musicButton =
+            document.getElementById("musicButton");
+
+
+        openWedding.addEventListener(
+
+            "click",
+
+            async function () {
+
+                opening.classList.add("opened");
+
+                document.body.classList.remove("locked");
+
+                musicButton.classList.add("show");
+
+
+                /*
+                 * Người dùng vừa click
+                 * nên trình duyệt cho phép
+                 * phát nhạc.
+                 */
+
+                try {
+
+                    await music.play();
+
+                    musicButton.classList.add("playing");
+
+                }
+
+                catch (error) {
+
+                    console.log(
+                        "Không thể tự phát nhạc",
+                        error
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        /* =========================================================
+           MUSIC BUTTON
+        ========================================================= */
+
+        musicButton.addEventListener(
+
+            "click",
+
+            function () {
+
+                if (music.paused) {
+
+                    music.play();
+
+                    musicButton.classList.add("playing");
+
+                }
+
+                else {
+
+                    music.pause();
+
+                    musicButton.classList.remove("playing");
+
+                }
+
+            }
+
+        );
+
+
+        /* =========================================================
+           DIRECTIONS
+        ========================================================= */
 
         function getDirectionsUrl() {
 
             return (
 
                 "https://www.google.com/maps/dir/?api=1" +
-
                 "&destination=" +
-
                 encodeURIComponent(
-
-                    WEDDING.latitude +
-                    "," +
-                    WEDDING.longitude
-
+                    WEDDING.latitude + "," + WEDDING.longitude
                 )
 
             );
@@ -3546,141 +2997,198 @@
 
         document
             .getElementById("directionLink")
-            .href =
-            getDirectionsUrl();
+            .href = getDirectionsUrl();
 
 
-
-        /* =====================================================
+        /* =========================================================
            MAP
-        ====================================================== */
+        ========================================================= */
 
         const map =
-            L.map("map", {
+            L.map(
 
-                scrollWheelZoom:
-                    false
-
-            });
-
-
-        map.setView(
-
-            [
-                WEDDING.latitude,
-                WEDDING.longitude
-            ],
-
-            14
-
-        );
-
-
-        const mapLayer =
-            L.tileLayer(
-
-                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                "map",
 
                 {
-
-                    maxZoom:
-                        19,
-
-                    attribution:
-                        "Tiles © Esri"
-
+                    scrollWheelZoom: false
                 }
 
             );
 
 
-        mapLayer.addTo(map);
+        map.setView(
+            [WEDDING.latitude, WEDDING.longitude],
+            14
+        );
 
 
+        L.tileLayer(
 
-        /* =====================================================
-           MARKER
-        ====================================================== */
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+
+            {
+                maxZoom: 19,
+                attribution: "Tiles © Esri"
+            }
+
+        ).addTo(map);
+
 
         const marker =
-            L.marker([
-
-                WEDDING.latitude,
-                WEDDING.longitude
-
-            ]);
+            L.marker([WEDDING.latitude, WEDDING.longitude]);
 
 
         marker.addTo(map);
 
 
         marker.bindPopup(
-
-            `
-        <div style="
-            text-align:center;
-            font-family:Montserrat,Arial,sans-serif;
-            font-size:11px;
-            line-height:1.6;
-        ">
-
-            <strong>
-                ${escapeHtml(WEDDING.location)}
-            </strong>
-
-            <br>
-
-            ${escapeHtml(WEDDING.address)}
-
-        </div>
-        `
-
+            "<strong>" + WEDDING.location + "</strong><br>" + WEDDING.address
         );
-
 
 
         setTimeout(
-
             function () {
-
                 map.invalidateSize();
-
             },
-
-            500
-
+            700
         );
 
 
+        /* =========================================================
+           COUNTDOWN
+        ========================================================= */
 
-        /* =====================================================
-           ESCAPE HTML
-        ====================================================== */
+        function updateCountdown(elementId, targetDate) {
 
-        function escapeHtml(value) {
+            const container =
+                document.getElementById(elementId);
 
-            return String(value)
 
-                .replace(/&/g, "&amp;")
+            if (!container) {
 
-                .replace(/</g, "&lt;")
+                return;
 
-                .replace(/>/g, "&gt;")
+            }
 
-                .replace(/"/g, "&quot;")
 
-                .replace(/'/g, "&#039;");
+            const target =
+                new Date(targetDate).getTime();
+
+
+            const now =
+                new Date().getTime();
+
+
+            const difference =
+                target - now;
+
+
+            if (difference <= 0) {
+
+                container.innerHTML =
+
+                    '<div class="countdown-finished">' +
+                    "Hôm nay là ngày vui ♥" +
+                    "</div>";
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(difference / (1000 * 60 * 60 * 24));
+
+
+            const hours =
+                Math.floor((difference / (1000 * 60 * 60)) % 24);
+
+
+            const minutes =
+                Math.floor((difference / (1000 * 60)) % 60);
+
+
+            const seconds =
+                Math.floor((difference / 1000) % 60);
+
+
+            const values = {
+
+                days: days,
+
+                hours: hours,
+
+                minutes: minutes,
+
+                seconds: seconds
+
+            };
+
+
+            Object.keys(values).forEach(
+
+                function (unit) {
+
+                    const element =
+                        container.querySelector('[data-unit="' + unit + '"]');
+
+
+                    if (element) {
+
+                        element.textContent =
+                            String(values[unit]).padStart(2, "0");
+
+                    }
+
+                }
+
+            );
 
         }
 
 
+        function runCountdowns() {
 
-        /* =====================================================
+            // Nhà trai: đếm ngược tới Lễ Thành Hôn 09:00 · 20.09.2026
+            updateCountdown("countdownGroom", WEDDING.groomCeremony);
+
+            // Nhà gái: đếm ngược tới Lễ Vu Quy 09:00 · 18.09.2026
+            updateCountdown("countdownBride", WEDDING.brideEvent);
+
+        }
+
+
+        runCountdowns();
+
+
+        setInterval(runCountdowns, 1000);
+
+
+        /* =========================================================
            SCROLL REVEAL
-        ====================================================== */
+
+           Dùng classList.toggle thay vì chỉ add + unobserve, nên
+           hiệu ứng sẽ chạy lại mỗi khi phần tử đi vào/đi ra khung
+           nhìn — tức là đẹp cả khi kéo xuống lẫn kéo ngược lên.
+           rootMargin âm ở đáy giúp phần tử "biến mất" hơi sớm khi
+           cuộn lên, để lần xuất hiện lại mượt và có chủ đích hơn.
+        ========================================================= */
+
+        const prefersReducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
 
         const revealElements =
-            document.querySelectorAll(".reveal");
+            document.querySelectorAll(
+
+                ".reveal, " +
+                ".reveal-left, " +
+                ".reveal-right, " +
+                ".reveal-zoom"
+
+            );
 
 
         const observer =
@@ -3692,20 +3200,10 @@
 
                         function (entry) {
 
-                            if (
+                            entry.target.classList.toggle(
+                                "visible",
                                 entry.isIntersecting
-                            ) {
-
-                                entry.target
-                                    .classList
-                                    .add("visible");
-
-                                observer
-                                    .unobserve(
-                                        entry.target
-                                    );
-
-                            }
+                            );
 
                         }
 
@@ -3714,10 +3212,8 @@
                 },
 
                 {
-
-                    threshold:
-                        .12
-
+                    threshold: .12,
+                    rootMargin: "0px 0px -8% 0px"
                 }
 
             );
@@ -3734,27 +3230,164 @@
         );
 
 
+        /* =========================================================
+           GALLERY CURTAIN
 
-        /* =====================================================
-           GALLERY LIGHTBOX
-        ====================================================== */
+           Cũng toggle hai chiều để mành ảnh khép/mở lại mỗi lần
+           cuộn qua, thay vì chỉ mở một lần duy nhất.
+        ========================================================= */
 
         const galleryItems =
-            document.querySelectorAll(
-                ".gallery-item"
+            document.querySelectorAll(".gallery-item");
+
+
+        const galleryObserver =
+            new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(
+
+                        function (entry) {
+
+                            entry.target.classList.toggle(
+                                "visible",
+                                entry.isIntersecting
+                            );
+
+                        }
+
+                    );
+
+                },
+
+                {
+                    threshold: .15
+                }
+
             );
 
+
+        galleryItems.forEach(
+
+            function (item) {
+
+                galleryObserver.observe(item);
+
+            }
+
+        );
+
+
+        /* =========================================================
+           PARALLAX NHẸ CHO ẢNH LỚN
+
+           Chỉ dịch chuyển transform bằng requestAnimationFrame nên
+           mượt trên cả PC lẫn điện thoại, và tự tắt hẳn nếu người
+           dùng đã bật "giảm chuyển động" trên thiết bị.
+        ========================================================= */
+
+        if (!prefersReducedMotion) {
+
+            const parallaxLayers = [
+
+                {
+                    element: document.querySelector(".photo-break-image"),
+                    speed: .12,
+                    baseScale: 1.05
+                },
+
+                {
+                    element: document.querySelector(".closing-image"),
+                    speed: .1,
+                    baseScale: 1.04
+                }
+
+            ].filter(function (layer) {
+
+                return !!layer.element;
+
+            });
+
+
+            let parallaxTicking = false;
+
+
+            function applyParallax() {
+
+                const viewportCenter =
+                    window.innerHeight / 2;
+
+
+                parallaxLayers.forEach(
+
+                    function (layer) {
+
+                        const rect =
+                            layer.element.parentElement.getBoundingClientRect();
+
+
+                        const distance =
+                            (rect.top + rect.height / 2) - viewportCenter;
+
+
+                        const offset =
+                            Math.max(
+                                -50,
+                                Math.min(50, distance * layer.speed * -1)
+                            );
+
+
+                        layer.element.style.transform =
+
+                            "translateY(" + offset.toFixed(1) + "px) " +
+                            "scale(" + layer.baseScale + ")";
+
+                    }
+
+                );
+
+
+                parallaxTicking = false;
+
+            }
+
+
+            function onParallaxScroll() {
+
+                if (!parallaxTicking) {
+
+                    window.requestAnimationFrame(applyParallax);
+
+                    parallaxTicking = true;
+
+                }
+
+            }
+
+
+            window.addEventListener(
+                "scroll",
+                onParallaxScroll,
+                { passive: true }
+            );
+
+
+            applyParallax();
+
+        }
+
+
+        /* =========================================================
+           GALLERY LIGHTBOX
+        ========================================================= */
 
         const lightbox =
-            document.getElementById(
-                "lightbox"
-            );
+            document.getElementById("lightbox");
 
 
         const lightboxImage =
-            document.getElementById(
-                "lightboxImage"
-            );
+            document.getElementById("lightboxImage");
 
 
         galleryItems.forEach(
@@ -3771,17 +3404,13 @@
                             item.querySelector("img");
 
 
-                        lightboxImage.src =
-                            image.src;
+                        lightboxImage.src = image.src;
 
 
-                        lightbox.classList.add(
-                            "show"
-                        );
+                        lightbox.classList.add("show");
 
-                        document.body.classList.add(
-                            "locked"
-                        );
+
+                        document.body.classList.add("locked");
 
                     }
 
@@ -3794,13 +3423,7 @@
 
         document
             .getElementById("lightboxClose")
-            .addEventListener(
-
-                "click",
-
-                closeLightbox
-
-            );
+            .addEventListener("click", closeLightbox);
 
 
         lightbox.addEventListener(
@@ -3809,9 +3432,7 @@
 
             function (event) {
 
-                if (
-                    event.target === lightbox
-                ) {
+                if (event.target === lightbox) {
 
                     closeLightbox();
 
@@ -3824,60 +3445,42 @@
 
         function closeLightbox() {
 
-            lightbox.classList.remove(
-                "show"
-            );
+            lightbox.classList.remove("show");
 
-            document.body.classList.remove(
-                "locked"
-            );
+            document.body.classList.remove("locked");
 
         }
 
 
-
-        /* =====================================================
+        /* =========================================================
            QR MODAL
-        ====================================================== */
+        ========================================================= */
 
         const qrModal =
-            document.getElementById(
-                "qrModal"
-            );
+            document.getElementById("qrModal");
 
 
         const qrImage =
-            document.getElementById(
-                "qrImage"
-            );
+            document.getElementById("qrImage");
 
 
         const qrName =
-            document.getElementById(
-                "qrName"
-            );
+            document.getElementById("qrName");
 
 
         const qrBank =
-            document.getElementById(
-                "qrBank"
-            );
+            document.getElementById("qrBank");
 
 
         const qrAccount =
-            document.getElementById(
-                "qrAccount"
-            );
+            document.getElementById("qrAccount");
 
 
         let currentQR = null;
 
 
-
         document
-            .querySelectorAll(
-                ".gift-person-button"
-            )
+            .querySelectorAll(".gift-person-button")
             .forEach(
 
                 function (button) {
@@ -3892,48 +3495,35 @@
                                 button.dataset.person;
 
 
-                            if (
-                                person === "bride"
-                            ) {
+                            if (person === "bride") {
 
-                                currentQR =
-                                    WEDDING.brideQR;
+                                currentQR = WEDDING.brideQR;
 
                             }
 
                             else {
 
-                                currentQR =
-                                    WEDDING.groomQR;
+                                currentQR = WEDDING.groomQR;
 
                             }
 
 
-                            qrName.textContent =
-                                currentQR.name;
+                            qrName.textContent = currentQR.name;
 
 
-                            qrBank.textContent =
-                                currentQR.bank;
+                            qrBank.textContent = currentQR.bank;
 
 
-                            qrAccount.textContent =
-                                "STK: " +
-                                currentQR.account;
+                            qrAccount.textContent = "STK: " + currentQR.account;
 
 
-                            qrImage.src =
-                                currentQR.qr;
+                            qrImage.src = currentQR.qr;
 
 
-                            qrModal.classList.add(
-                                "show"
-                            );
+                            qrModal.classList.add("show");
 
 
-                            document.body.classList.add(
-                                "locked"
-                            );
+                            document.body.classList.add("locked");
 
                         }
 
@@ -3944,20 +3534,13 @@
             );
 
 
-
-        /* =====================================================
+        /* =========================================================
            CLOSE QR
-        ====================================================== */
+        ========================================================= */
 
         document
             .getElementById("qrClose")
-            .addEventListener(
-
-                "click",
-
-                closeQR
-
-            );
+            .addEventListener("click", closeQR);
 
 
         qrModal.addEventListener(
@@ -3966,9 +3549,7 @@
 
             function (event) {
 
-                if (
-                    event.target === qrModal
-                ) {
+                if (event.target === qrModal) {
 
                     closeQR();
 
@@ -3981,21 +3562,16 @@
 
         function closeQR() {
 
-            qrModal.classList.remove(
-                "show"
-            );
+            qrModal.classList.remove("show");
 
-            document.body.classList.remove(
-                "locked"
-            );
+            document.body.classList.remove("locked");
 
         }
 
 
-
-        /* =====================================================
+        /* =========================================================
            DOWNLOAD QR
-        ====================================================== */
+        ========================================================= */
 
         document
             .getElementById("downloadQr")
@@ -4005,9 +3581,7 @@
 
                 async function () {
 
-                    if (
-                        !currentQR
-                    ) {
+                    if (!currentQR) {
 
                         return;
 
@@ -4017,9 +3591,7 @@
                     try {
 
                         const response =
-                            await fetch(
-                                currentQR.qr
-                            );
+                            await fetch(currentQR.qr);
 
 
                         const blob =
@@ -4027,30 +3599,20 @@
 
 
                         const url =
-                            URL.createObjectURL(
-                                blob
-                            );
+                            URL.createObjectURL(blob);
 
 
                         const link =
-                            document.createElement(
-                                "a"
-                            );
+                            document.createElement("a");
 
 
-                        link.href =
-                            url;
+                        link.href = url;
 
 
-                        link.download =
-                            "QR-" +
-                            currentQR.name +
-                            ".png";
+                        link.download = "QR-" + currentQR.name + ".png";
 
 
-                        document.body.appendChild(
-                            link
-                        );
+                        document.body.appendChild(link);
 
 
                         link.click();
@@ -4059,23 +3621,13 @@
                         link.remove();
 
 
-                        URL.revokeObjectURL(
-                            url
-                        );
+                        URL.revokeObjectURL(url);
 
                     }
 
                     catch (error) {
 
-                        /*
-                         * Nếu server không cho fetch
-                         * do CORS, mở trực tiếp file.
-                         */
-
-                        window.open(
-                            currentQR.qr,
-                            "_blank"
-                        );
+                        window.open(currentQR.qr, "_blank");
 
                     }
 
@@ -4084,37 +3636,23 @@
             );
 
 
-
-        /* =====================================================
+        /* =========================================================
            WISHES
-           
-           DEMO LOCAL STORAGE
-    
-           Sau này có backend thì thay phần này
-           bằng API.
-        ====================================================== */
+        ========================================================= */
 
         const wishForm =
-            document.getElementById(
-                "wishForm"
-            );
+            document.getElementById("wishForm");
 
 
         const wishList =
-            document.getElementById(
-                "wishList"
-            );
+            document.getElementById("wishList");
 
 
         function loadWishes() {
 
             const wishes =
                 JSON.parse(
-
-                    localStorage.getItem(
-                        "weddingWishes"
-                    ) || "[]"
-
+                    localStorage.getItem("weddingWishes") || "[]"
                 );
 
 
@@ -4128,9 +3666,7 @@
 
                     function (wish) {
 
-                        renderWish(
-                            wish
-                        );
+                        renderWish(wish);
 
                     }
 
@@ -4142,60 +3678,39 @@
         function renderWish(wish) {
 
             const item =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
-            item.className =
-                "wish-item";
+            item.className = "wish-item";
 
 
             const author =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
-            author.className =
-                "wish-author";
+            author.className = "wish-author";
 
 
-            author.textContent =
-                wish.name +
-                " · " +
-                wish.to;
+            author.textContent = wish.name + " · " + wish.to;
 
 
             const message =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
-            message.className =
-                "wish-message";
+            message.className = "wish-message";
 
 
-            message.textContent =
-                "“" +
-                wish.message +
-                "”";
+            message.textContent = "“" + wish.message + "”";
 
 
-            item.appendChild(
-                author
-            );
+            item.appendChild(author);
 
 
-            item.appendChild(
-                message
-            );
+            item.appendChild(message);
 
 
-            wishList.appendChild(
-                item
-            );
+            wishList.appendChild(item);
 
         }
 
@@ -4211,34 +3726,25 @@
 
                 const name =
                     document
-                        .getElementById(
-                            "wishName"
-                        )
+                        .getElementById("wishName")
                         .value
                         .trim();
 
 
                 const to =
                     document
-                        .getElementById(
-                            "wishTo"
-                        )
+                        .getElementById("wishTo")
                         .value;
 
 
                 const message =
                     document
-                        .getElementById(
-                            "wishMessage"
-                        )
+                        .getElementById("wishMessage")
                         .value
                         .trim();
 
 
-                if (
-                    !name ||
-                    !message
-                ) {
+                if (!name || !message) {
 
                     return;
 
@@ -4247,39 +3753,26 @@
 
                 const wishes =
                     JSON.parse(
-
-                        localStorage.getItem(
-                            "weddingWishes"
-                        ) || "[]"
-
+                        localStorage.getItem("weddingWishes") || "[]"
                     );
 
 
                 wishes.push({
 
-                    name:
-                        name,
+                    name: name,
 
-                    to:
-                        to,
+                    to: to,
 
-                    message:
-                        message,
+                    message: message,
 
-                    createdAt:
-                        new Date().toISOString()
+                    createdAt: new Date().toISOString()
 
                 });
 
 
                 localStorage.setItem(
-
                     "weddingWishes",
-
-                    JSON.stringify(
-                        wishes
-                    )
-
+                    JSON.stringify(wishes)
                 );
 
 
@@ -4296,10 +3789,9 @@
         loadWishes();
 
 
-
-        /* =====================================================
+        /* =========================================================
            ESC KEY
-        ====================================================== */
+        ========================================================= */
 
         document.addEventListener(
 
@@ -4307,9 +3799,7 @@
 
             function (event) {
 
-                if (
-                    event.key === "Escape"
-                ) {
+                if (event.key === "Escape") {
 
                     closeQR();
 
@@ -4321,8 +3811,8 @@
 
         );
 
-    </script>
 
+    </script>
 
 </body>
 
