@@ -48,6 +48,24 @@
 
         html {
             min-height: 100%;
+
+            /*
+             * Tắt tính năng "font boosting" / text autosizer
+             * của Chrome for Android & Samsung Internet.
+             *
+             * Nếu không tắt, trình duyệt trên MÁY THẬT (không
+             * phải devtool giả lập trên PC) sẽ tự ý phóng to một
+             * số khối chữ căn giữa (tiêu đề, tên địa điểm...) để
+             * "dễ đọc hơn", khiến chữ to hơn CSS quy định và bị
+             * tràn dòng — đây chính là lý do devtool responsive
+             * trên PC nhìn bình thường nhưng Samsung S21 Ultra
+             * (và nhiều máy Android/Samsung Internet khác) lại
+             * bị rớt chữ.
+             */
+
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
 
@@ -223,6 +241,11 @@
             color: #544335;
 
             letter-spacing: -.5px;
+
+            /* Ưu tiên chia dòng cân đối, tránh còn lại 1 từ mồ côi
+               (vd: "Hương" rớt xuống dòng riêng). Trình duyệt nào
+               chưa hỗ trợ sẽ tự bỏ qua, không ảnh hưởng gì. */
+            text-wrap: balance;
         }
 
 
@@ -522,6 +545,8 @@
             color: #514237;
 
             margin-bottom: 10px;
+
+            text-wrap: balance;
         }
 
 
@@ -1185,7 +1210,7 @@
 
                 font-size:
                     clamp(34px,
-                        8vw,
+                        10vw,
                         44px);
             }
 
