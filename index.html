@@ -558,6 +558,73 @@
 
 
         /* =====================================================
+           ATTENTION HINT
+
+           Mũi tên + chữ nhỏ nhấp nháy phía trên 2 nút, để
+           người xem hiểu ngay là "có nút bấm được" ở đây.
+        ====================================================== */
+
+        .action-hint {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-bottom: 12px;
+
+            font-size: 10px;
+
+            letter-spacing: .5px;
+
+            color: #a9906f;
+
+            animation:
+                hintBlink 2s ease-in-out infinite;
+        }
+
+
+        .action-hint-arrow {
+
+            display: inline-block;
+
+            animation:
+                hintBounce 1.4s ease-in-out infinite;
+        }
+
+
+        @keyframes hintBlink {
+
+            0%,
+            100% {
+                opacity: .55;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+        }
+
+
+        @keyframes hintBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(4px);
+            }
+
+        }
+
+
+        /* =====================================================
            PRIMARY BUTTON
            
            Nút quan trọng nhất.
@@ -726,6 +793,148 @@
             color: #ffffff;
 
             line-height: 1;
+        }
+
+
+        /* =====================================================
+           ATTENTION EFFECTS (glow ring + light sweep)
+
+           Mục đích: những người không quen thiệp cưới online
+           vẫn nhận ra ngay đây là 2 nút có thể bấm được, không
+           cần phải đọc chữ mới biết.
+
+           - pulseGlow...: một vòng sáng mờ dần lan ra quanh nút,
+             lặp lại đều đặn như nhịp thở, không giật mắt.
+           - shimmerSweep: một vệt sáng mỏng lướt qua bề mặt nút,
+             giống hiệu ứng nút CTA cao cấp.
+           - Animation tự tạm dừng khi hover/chạm để không
+             "đánh nhau" với hiệu ứng nhấc nút lên khi hover.
+        ====================================================== */
+
+        .direction-button,
+        .invitation-button {
+
+            position: relative;
+
+            overflow: hidden;
+
+            animation:
+                pulseGlowPrimary 2.6s ease-in-out infinite;
+        }
+
+
+        .invitation-button {
+
+            animation-name:
+                pulseGlowSecondary;
+
+            animation-delay:
+                1.1s;
+        }
+
+
+        .direction-button:hover,
+        .direction-button:active,
+        .invitation-button:hover,
+        .invitation-button:active {
+
+            animation-play-state:
+                paused;
+        }
+
+
+        .direction-button::after,
+        .invitation-button::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -60%;
+
+            width: 40%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(115deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, .55) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+
+            transform:
+                skewX(-20deg);
+
+            pointer-events: none;
+
+            animation:
+                shimmerSweep 3.6s ease-in-out infinite;
+        }
+
+
+        .invitation-button::after {
+
+            animation-delay:
+                1.8s;
+        }
+
+
+        @keyframes pulseGlowPrimary {
+
+            0%,
+            100% {
+
+                box-shadow:
+                    0 10px 28px rgba(130, 95, 59, 0.25),
+                    0 0 0 0 rgba(168, 135, 99, .55);
+            }
+
+            60% {
+
+                box-shadow:
+                    0 10px 28px rgba(130, 95, 59, 0.25),
+                    0 0 0 15px rgba(168, 135, 99, 0);
+            }
+
+        }
+
+
+        @keyframes pulseGlowSecondary {
+
+            0%,
+            100% {
+
+                box-shadow:
+                    0 8px 22px rgba(191, 126, 137, .20),
+                    0 0 0 0 rgba(201, 135, 145, .55);
+            }
+
+            60% {
+
+                box-shadow:
+                    0 8px 22px rgba(191, 126, 137, .20),
+                    0 0 0 15px rgba(201, 135, 145, 0);
+            }
+
+        }
+
+
+        @keyframes shimmerSweep {
+
+            0% {
+                left: -60%;
+            }
+
+            35% {
+                left: 130%;
+            }
+
+            100% {
+                left: 130%;
+            }
+
         }
 
 
@@ -976,7 +1185,7 @@
 
                 font-size:
                     clamp(34px,
-                        10vw,
+                        8vw,
                         44px);
             }
 
@@ -1005,7 +1214,7 @@
 
             .title {
 
-                font-size: 40px;
+                font-size: 38px;
             }
 
 
@@ -1087,6 +1296,33 @@
             .location-name {
 
                 font-size: 25px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration: .01ms !important;
+
+                transition-duration: .01ms !important;
+
+            }
+
+
+            .direction-button::after,
+            .invitation-button::after {
+
+                display: none;
+
             }
 
         }
@@ -1224,6 +1460,17 @@
             <section class="action">
 
 
+                <div class="action-hint">
+
+                    <span class="action-hint-arrow">↓</span>
+
+                    Chạm vào nút bên dưới
+
+                    <span class="action-hint-arrow">↓</span>
+
+                </div>
+
+
                 <!-- =============================================
                  PRIMARY ACTION
             ============================================== -->
@@ -1235,7 +1482,7 @@
                     </span>
 
                     <span>
-                        Chỉ đường đến tiệc cưới
+                        Chạm vào đây để chỉ đường đến tiệc cưới
                     </span>
 
                 </button>
@@ -1254,7 +1501,7 @@
                     </span>
 
                     <span>
-                        Xem thiệp cưới
+                        Chạm vào đây để xem thiệp cưới
                     </span>
 
                 </a>
